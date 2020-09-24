@@ -1,8 +1,15 @@
 import React from 'react';
 
-function App() {
+import DashboardAlbum from './pages/DashboardAlbum';
+
+import GlobalStyle from './styles/global';
+
+function App(): any {
   return (
-    <h1>ReactJS</h1>
+    <>
+      <DashboardAlbum />
+      <GlobalStyle />
+    </>
   );
 }
 
