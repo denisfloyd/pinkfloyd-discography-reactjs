@@ -8,7 +8,7 @@ export const Container = styled.div`
   margin: 0;
   padding: 0;
 
-  background: #00ff;
+  background: #00ff url('../../assets/dsotm.png');
 `;
 
 export const Content = styled.div`
