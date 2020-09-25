@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import Drawer from '@material-ui/core/Drawer';
 
-import { Container, Content } from './styles';
+import { Container, Content, AlbumCard } from './styles';
 
 const DashboardAlbum: React.FC = () => {
-  const [toogleDrawer, setToggleDrawer] = useState(true);
+  const [toogleDrawer, setToggleDrawer] = useState(false);
 
   return (
     <>
@@ -16,17 +16,10 @@ const DashboardAlbum: React.FC = () => {
       <Container>
         <Content>
           <input type="text" placeholder="Album..." />
-
-          <ul>
-            <li />
-            <li />
-            <li />
-            <li />
-            <li />
-            <li />
-          </ul>
         </Content>
       </Container>
+
+      <AlbumCard />
     </>
   );
 };
