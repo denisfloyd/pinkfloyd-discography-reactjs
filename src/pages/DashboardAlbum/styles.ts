@@ -50,9 +50,6 @@ export const AlbumCard = styled.div`
   height: 200px;
   width: 190px;
   margin: 6px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: left;
   transition: opacity 1s;
   border-radius: 5px;
   background: url('https://upload.wikimedia.org/wikipedia/pt/b/b7/Wish_You_Were_Here.jpg');

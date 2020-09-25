@@ -54,9 +54,39 @@ export const teste = [
       'https://upload.wikimedia.org/wikipedia/pt/b/b7/Wish_You_Were_Here.jpg',
   },
   {
-    id: 1,
+    id: 10,
+    name: 'Animals',
+    image:
+      'https://upload.wikimedia.org/wikipedia/pt/thumb/4/4a/Pink_Floyd_-_Animals.jpg/220px-Pink_Floyd_-_Animals.jpg',
+  },
+  {
+    id: 11,
+    name: 'The Wall',
+    image:
+      'https://images-na.ssl-images-amazon.com/images/I/81QzRZ4UoNL._AC_SX466_.jpg',
+  },
+  {
+    id: 12,
+    name: 'The Final Cut',
+    image:
+      'https://upload.wikimedia.org/wikipedia/pt/f/f7/Pink_Floyd_-_The_Final_Cut.jpg',
+  },
+  {
+    id: 13,
+    name: 'A Momentary Lapse of Reason',
+    image:
+      'https://upload.wikimedia.org/wikipedia/pt/3/3c/Pink_Floyd_-_A_Momentary_Lapse_of_Reason.jpg',
+  },
+  {
+    id: 14,
     name: 'Division Bell',
     image:
       'https://upload.wikimedia.org/wikipedia/en/6/6e/Pink_Floyd_-_Division_Bell.jpg',
+  },
+  {
+    id: 15,
+    name: 'The Endless River',
+    image:
+      'https://upload.wikimedia.org/wikipedia/pt/0/04/The_Endless_River_-_Pink_Floyd_-_2014.jpg',
   },
 ];
