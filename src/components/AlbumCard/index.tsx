@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Album } from '../../info';
 
-import { Container } from './styles';
+import { Container, Content, AlbumInfo } from './styles';
 
 interface AlbumCardProps {
   // click?: () => void;
@@ -10,7 +10,15 @@ interface AlbumCardProps {
 }
 
 const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
-  return <Container cover={album.image} />;
+  return (
+    <Container>
+      <Content cover={album.image} />
+      <AlbumInfo className="overview">
+        <h3>{album.name}</h3>
+        {album.year}
+      </AlbumInfo>
+    </Container>
+  );
 };
 
 export default AlbumCard;
