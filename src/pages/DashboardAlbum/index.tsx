@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import Drawer from '@material-ui/core/Drawer';
 
+import HeaderBar from '../../components/Header';
+
 import { Container, Content, AlbumCard } from './styles';
 
 const DashboardAlbum: React.FC = () => {
@@ -9,6 +11,7 @@ const DashboardAlbum: React.FC = () => {
 
   return (
     <>
+      <HeaderBar />
       <Drawer anchor="left" open={toogleDrawer}>
         <h1>TESTE</h1>
       </Drawer>
