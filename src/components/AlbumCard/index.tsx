@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Album } from '../../info';
+import { Album } from '../../data/info';
 
 import { Container, Content, AlbumInfo } from './styles';
 

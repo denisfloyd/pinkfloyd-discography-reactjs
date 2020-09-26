@@ -5,12 +5,13 @@ import Drawer from '@material-ui/core/Drawer';
 import HeaderBar from '../../components/Header';
 import AlbumCard from '../../components/AlbumCard';
 
-import { Album, pinkFloydAlbunsArray } from '../../info';
+import { Album, pinkFloydAlbunsArray } from '../../data/info';
 
 import { Container, Content, AlbumsView } from './styles';
 
 const DashboardAlbum: React.FC = () => {
   const [toogleDrawer, setToggleDrawer] = useState(false);
+
   const [userScrollDown, setUserScrollDown] = useState(false);
 
   const handleScrollScreen = useCallback(() => {
