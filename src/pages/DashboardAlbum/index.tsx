@@ -5,20 +5,26 @@ import Drawer from '@material-ui/core/Drawer';
 import HeaderBar from '../../components/Header';
 import AlbumCard from '../../components/AlbumCard';
 
-import { Container, Content } from './styles';
+import { Album, pinkFloydAlbunsArray } from '../../info';
+
+import { Container, Content, AlbumsView } from './styles';
 
 const DashboardAlbum: React.FC = () => {
   const [toogleDrawer, setToggleDrawer] = useState(false);
+  const [userScrollDown, setUserScrollDown] = useState(false);
 
   const handleScrollScreen = useCallback(() => {
-    console.log(window.scrollY);
+    if (window.scrollY > 60) {
+      return setUserScrollDown(true);
+    }
+    return setUserScrollDown(false);
   }, []);
 
   window.addEventListener('scroll', handleScrollScreen);
 
   return (
     <>
-      <HeaderBar />
+      <HeaderBar userScroolDown={userScrollDown} />
       <Drawer anchor="left" open={toogleDrawer}>
         <h1>TESTE</h1>
       </Drawer>
@@ -29,9 +35,11 @@ const DashboardAlbum: React.FC = () => {
         </Content>
       </Container>
 
-      <AlbumCard />
-      <AlbumCard />
-      <AlbumCard />
+      <AlbumsView>
+        {pinkFloydAlbunsArray.map(album => (
+          <AlbumCard key={album.id} album={album} />
+        ))}
+      </AlbumsView>
     </>
   );
 };

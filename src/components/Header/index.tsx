@@ -4,9 +4,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { Container, MenuButton, TextTitle } from './styles';
 
-const HeaderBar: React.FC = () => {
+interface HeaderProps {
+  userScroolDown: boolean;
+}
+
+const HeaderBar: React.FC<HeaderProps> = ({ userScroolDown }) => {
   return (
-    <Container>
+    <Container isScrool={userScroolDown}>
       <MenuButton>
         <MenuIcon fontSize="large" style={{ color: '#fff' }} />
       </MenuButton>

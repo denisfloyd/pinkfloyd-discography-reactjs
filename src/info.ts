@@ -1,4 +1,10 @@
-export const teste = [
+export interface Album {
+  id: number;
+  name: string;
+  image: string;
+}
+
+export const pinkFloydAlbunsArray: Array<Album> = [
   {
     id: 1,
     name: 'The Piper at the Gates of Dawn',

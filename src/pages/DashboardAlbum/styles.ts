@@ -30,3 +30,11 @@ export const Content = styled.div`
     box-shadow: 3px 4px 3px #aaaaaa;
   }
 `;
+
+export const AlbumsView = styled.div`
+  max-width: 1600px;
+  padding: 0 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+`;
