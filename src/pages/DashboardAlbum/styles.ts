@@ -33,8 +33,9 @@ export const Content = styled.div`
 
 export const AlbumsView = styled.div`
   max-width: 1600px;
-  padding: 0 20px;
+  padding: 0 20px 40px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  flex-wrap: wrap;
 `;

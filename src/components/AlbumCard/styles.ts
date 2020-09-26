@@ -13,7 +13,7 @@ export const Container = styled.div<ContainerProps>`
     `}
 
   height: 300px;
-  width: 280px;
+  width: 295px;
   margin: 6px;
   transition: opacity 1s;
   border-radius: 5px;
@@ -27,8 +27,4 @@ export const Container = styled.div<ContainerProps>`
   cursor: pointer;
   display: flex;
   align-items: flex-end;
-
-  @media screen and (max-width: 420px) {
-    width: 145px;
-  }
 `;
