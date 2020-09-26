@@ -1,16 +1,21 @@
 import React, { useCallback, useState } from 'react';
 
-import Drawer from '@material-ui/core/Drawer';
-
 import HeaderBar from '../../components/Header';
 import AlbumCard from '../../components/AlbumCard';
 
 import { Album, pinkFloydAlbunsArray } from '../../data/info';
 
-import { Container, Content, AlbumsView } from './styles';
+import {
+  Container,
+  ContainerDrawer,
+  Content,
+  AlbumsView,
+  DrawerAlbumItem,
+} from './styles';
 
 const DashboardAlbum: React.FC = () => {
-  const [toogleDrawer, setToggleDrawer] = useState(false);
+  const [drawerWidth] = useState(300);
+  const [toogleDrawer, setToggleDrawer] = useState(true);
 
   const [userScrollDown, setUserScrollDown] = useState(false);
 
@@ -26,9 +31,16 @@ const DashboardAlbum: React.FC = () => {
   return (
     <>
       <HeaderBar userScroolDown={userScrollDown} />
-      <Drawer anchor="left" open={toogleDrawer}>
-        <h1>TESTE</h1>
-      </Drawer>
+      <ContainerDrawer anchor="left" open={toogleDrawer} variant="persistent">
+        <ul>
+          {pinkFloydAlbunsArray.map(album => (
+            <DrawerAlbumItem>
+              <img src={album.image} alt={album.name} />
+              <p>{album.name}</p>
+            </DrawerAlbumItem>
+          ))}
+        </ul>
+      </ContainerDrawer>
 
       <Container>
         <Content>

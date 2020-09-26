@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import dsotm from '../../assets/dsotm.png';
+import Drawer from '@material-ui/core/Drawer';
 
 export const Container = styled.main`
   height: 30vh;
@@ -12,6 +12,19 @@ export const Container = styled.main`
   margin-bottom: 20px;
 
   background: #202020;
+`;
+
+export const ContainerDrawer = styled(Drawer)``;
+
+export const DrawerAlbumItem = styled.div`
+  width: 100%;
+  display: flex;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
 `;
 
 export const Content = styled.div`
