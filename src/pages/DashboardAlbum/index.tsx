@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import Drawer from '@material-ui/core/Drawer';
 
 import HeaderBar from '../../components/Header';
+import AlbumCard from '../../components/AlbumCard';
 
-import { Container, Content, AlbumCard } from './styles';
+import { Container, Content } from './styles';
 
 const DashboardAlbum: React.FC = () => {
   const [toogleDrawer, setToggleDrawer] = useState(false);
+
+  const handleScrollScreen = useCallback(() => {
+    console.log(window.scrollY);
+  }, []);
+
+  window.addEventListener('scroll', handleScrollScreen);
 
   return (
     <>
@@ -22,6 +29,8 @@ const DashboardAlbum: React.FC = () => {
         </Content>
       </Container>
 
+      <AlbumCard />
+      <AlbumCard />
       <AlbumCard />
     </>
   );
