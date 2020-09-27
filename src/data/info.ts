@@ -127,7 +127,7 @@ export const pinkFloydAlbunsArray: Array<Album> = [
   },
   {
     id: 18,
-    name: 'Pulse',
+    name: 'Is There Abybody out There',
     image:
       'https://upload.wikimedia.org/wikipedia/pt/e/e9/Pink_Floyd_-_Is_There_Anybody_Out_There%3F_The_Wall_Live_1980-81.jpg',
     year: 2000,

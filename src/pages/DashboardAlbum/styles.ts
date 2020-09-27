@@ -16,14 +16,23 @@ export const Container = styled.main`
 
 export const ContainerDrawer = styled(Drawer)``;
 
-export const DrawerAlbumItem = styled.div`
+export const DrawerAlbumItem = styled.li`
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px;
+  background: #202020;
+  color: #fff;
 
   img {
-    width: 32px;
-    height: 32px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
+  }
+
+  p {
+    margin-left: 0.5rem;
   }
 `;
 
