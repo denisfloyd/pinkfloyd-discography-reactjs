@@ -25,7 +25,7 @@ export const DrawerAlbumItem = styled.li`
   padding: 5px;
   background-color: #202020;
   color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
 
