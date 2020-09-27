@@ -6,11 +6,12 @@ import AlbumCard from '../../components/AlbumCard';
 import { Album, pinkFloydAlbunsArray } from '../../data/info';
 
 import {
-  Container,
   ContainerDrawer,
+  DrawerAlbumItem,
+  AlbumDivider,
+  Container,
   Content,
   AlbumsView,
-  DrawerAlbumItem,
 } from './styles';
 
 const DashboardAlbum: React.FC = () => {
