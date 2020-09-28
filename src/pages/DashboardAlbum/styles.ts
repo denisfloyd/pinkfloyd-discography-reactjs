@@ -18,23 +18,18 @@ export const Container = styled.main`
 export const ContainerDrawer = styled(Drawer)``;
 
 export const DrawerHeader = styled.div`
-  /* height: 100px; */
+  height: 100px;
   background: #505050;
   display: flex;
-  align-items: center;
   justify-content: flex-end;
 `;
 
 export const DrawerHeaderContainer = styled.div`
-  background: #505050;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
 `;
 
-export const DrawerBackButton = styled(IconButton)`
-  color: #fff;
-`;
+export const DrawerBackButton = styled(IconButton)``;
 
 export const DrawerAlbumItem = styled.li`
   width: 250px;

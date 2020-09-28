@@ -6,20 +6,19 @@ import { Container, MenuButton, TextTitle } from './styles';
 interface HeaderProps {
   userScroolDown: boolean;
   handleOpenDrawer: (newValue: boolean) => void;
+  toogleDrawer: boolean;
 }
 
 const HeaderBar: React.FC<HeaderProps> = ({
   userScroolDown,
   handleOpenDrawer,
+  toogleDrawer,
 }) => {
-  const [toogleDrawer, setToogleDrawer] = useState(false);
-
   return (
     <Container isScrool={userScroolDown}>
       <MenuButton
         onClick={() => {
           handleOpenDrawer(!toogleDrawer);
-          setToogleDrawer(!toogleDrawer);
         }}
       >
         <MenuIcon fontSize="large" style={{ color: '#fff' }} />

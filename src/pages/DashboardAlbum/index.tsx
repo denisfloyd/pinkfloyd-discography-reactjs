@@ -11,6 +11,7 @@ import { pinkFloydAlbunsArray } from '../../data/info';
 import {
   ContainerDrawer,
   DrawerHeader,
+  DrawerHeaderContainer,
   DrawerBackButton,
   DrawerAlbumItem,
   Container,
@@ -37,15 +38,20 @@ const DashboardAlbum: React.FC = () => {
       <HeaderBar
         userScroolDown={userScrollDown}
         handleOpenDrawer={setToggleDrawer}
+        toogleDrawer={toogleDrawer}
       />
       <ContainerDrawer anchor="left" open={toogleDrawer} variant="persistent">
-        <div style={{ height: 100 }}>
-          <DrawerHeader>
-            <DrawerBackButton>
-              <ArrowBackIosIcon />
+        <DrawerHeader>
+          <DrawerHeaderContainer>
+            <DrawerBackButton
+              onClick={() => {
+                setToggleDrawer(!toogleDrawer);
+              }}
+            >
+              <ArrowBackIosIcon style={{ color: '#fff' }} />
             </DrawerBackButton>
-          </DrawerHeader>
-        </div>
+          </DrawerHeaderContainer>
+        </DrawerHeader>
 
         <ul>
           {pinkFloydAlbunsArray.map(album => (
