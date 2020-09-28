@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+  :root {
+    --drawer-width: 300;
+  }
+
   * {
     margin: 0;
     padding: 0;

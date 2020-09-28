@@ -1,17 +1,27 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import { Container, MenuButton, TextTitle } from './styles';
 
 interface HeaderProps {
   userScroolDown: boolean;
+  handleOpenDrawer: (newValue: boolean) => void;
 }
 
-const HeaderBar: React.FC<HeaderProps> = ({ userScroolDown }) => {
+const HeaderBar: React.FC<HeaderProps> = ({
+  userScroolDown,
+  handleOpenDrawer,
+}) => {
+  const [toogleDrawer, setToogleDrawer] = useState(false);
+
   return (
     <Container isScrool={userScroolDown}>
-      <MenuButton>
+      <MenuButton
+        onClick={() => {
+          handleOpenDrawer(!toogleDrawer);
+          setToogleDrawer(!toogleDrawer);
+        }}
+      >
         <MenuIcon fontSize="large" style={{ color: '#fff' }} />
       </MenuButton>
       <TextTitle>PINK FLOYD DISCOGRAPHY</TextTitle>

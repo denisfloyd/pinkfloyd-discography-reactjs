@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
+import { IconButton } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
 
 export const Container = styled.main`
   height: 30vh;
@@ -16,6 +16,25 @@ export const Container = styled.main`
 `;
 
 export const ContainerDrawer = styled(Drawer)``;
+
+export const DrawerHeader = styled.div`
+  /* height: 100px; */
+  background: #505050;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const DrawerHeaderContainer = styled.div`
+  background: #505050;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const DrawerBackButton = styled(IconButton)`
+  color: #fff;
+`;
 
 export const DrawerAlbumItem = styled.li`
   width: 250px;
@@ -44,8 +63,6 @@ export const DrawerAlbumItem = styled.li`
     background-color: #505050;
   }
 `;
-
-export const AlbumDivider = styled(Divider)``;
 
 export const Content = styled.div`
   position: relative;

@@ -1,22 +1,25 @@
 import React, { useCallback, useState } from 'react';
 
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+
+import { colors } from '@material-ui/core';
 import HeaderBar from '../../components/Header';
 import AlbumCard from '../../components/AlbumCard';
 
-import { Album, pinkFloydAlbunsArray } from '../../data/info';
+import { pinkFloydAlbunsArray } from '../../data/info';
 
 import {
   ContainerDrawer,
+  DrawerHeader,
+  DrawerBackButton,
   DrawerAlbumItem,
-  AlbumDivider,
   Container,
   Content,
   AlbumsView,
 } from './styles';
 
 const DashboardAlbum: React.FC = () => {
-  const [drawerWidth] = useState(300);
-  const [toogleDrawer, setToggleDrawer] = useState(true);
+  const [toogleDrawer, setToggleDrawer] = useState(false);
 
   const [userScrollDown, setUserScrollDown] = useState(false);
 
@@ -31,8 +34,19 @@ const DashboardAlbum: React.FC = () => {
 
   return (
     <>
-      <HeaderBar userScroolDown={userScrollDown} />
+      <HeaderBar
+        userScroolDown={userScrollDown}
+        handleOpenDrawer={setToggleDrawer}
+      />
       <ContainerDrawer anchor="left" open={toogleDrawer} variant="persistent">
+        <div style={{ height: 100 }}>
+          <DrawerHeader>
+            <DrawerBackButton>
+              <ArrowBackIosIcon />
+            </DrawerBackButton>
+          </DrawerHeader>
+        </div>
+
         <ul>
           {pinkFloydAlbunsArray.map(album => (
             <DrawerAlbumItem>
