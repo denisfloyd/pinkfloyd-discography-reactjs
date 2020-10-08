@@ -15,7 +15,9 @@ export const Container = styled.main`
   background: #202020;
 `;
 
-export const ContainerDrawer = styled(Drawer)``;
+export const ContainerDrawer = styled(Drawer)`
+  overflow: hidden;
+`;
 
 export const DrawerHeader = styled.div`
   height: 100px;

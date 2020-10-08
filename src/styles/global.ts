@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProviderProps } from 'styled-components';
 
 export default createGlobalStyle`
   :root {
@@ -13,8 +13,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #202020;
-    color: #000;
+    background: ${({ theme }): ThemeProviderProps => theme.body};
+    color: ${({ theme }) => theme.text};
     -webkit-font-smoothing: antialiased;
   }
 
