@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
-import { colors } from '@material-ui/core';
 import HeaderBar from '../../components/Header';
 import AlbumCard from '../../components/AlbumCard';
 
