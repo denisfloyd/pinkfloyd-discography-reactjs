@@ -4,7 +4,8 @@ import { IconButton } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 
 export const Container = styled.main`
-  height: 30vh;
+  position: relative;
+  height: 20vh;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -62,9 +63,11 @@ export const DrawerAlbumItem = styled.li`
 `;
 
 export const Content = styled.div`
-  position: relative;
+  position: absolute;
+  bottom: -10px;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 
   > input {
     width: 260px;
@@ -74,7 +77,7 @@ export const Content = styled.div`
     padding: 0 14px;
     border-radius: 25px;
 
-    box-shadow: 3px 4px 3px #aaaaaa;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
 `;
 
