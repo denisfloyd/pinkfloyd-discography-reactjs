@@ -3,6 +3,7 @@ export interface Album {
   name: string;
   image: string;
   year: number;
+  playlist?: Array<string>;
 }
 
 export const pinkFloydAlbunsArray: Array<Album> = [
@@ -12,6 +13,19 @@ export const pinkFloydAlbunsArray: Array<Album> = [
     image:
       'https://upload.wikimedia.org/wikipedia/en/3/3c/PinkFloyd-album-piperatthegatesofdawn_300.jpg',
     year: 1967,
+    playlist: [
+      'Astronomy Domine',
+      'Lucifer Sam',
+      'Matilda Mother',
+      'Flaming',
+      'Pow R. Toc H. (Nick Mason, Wright, Roger Waters, Barrett)',
+      'Take Up Thy Stethoscope and Walk (Waters)',
+      'Interstellar Overdrive (Barrett, Mason, Waters, Wright)',
+      'The Gnome',
+      'Chapter 24',
+      'The Scarecrow',
+      'Bike',
+    ],
   },
   {
     id: 2,
@@ -19,6 +33,15 @@ export const pinkFloydAlbunsArray: Array<Album> = [
     image:
       'https://upload.wikimedia.org/wikipedia/pt/0/03/Pink_Floyd_-_A_Saucerful_of_Secrets.jpg',
     year: 1968,
+    playlist: [
+      'Let There Be More Light',
+      'Remember a Day',
+      'Set the Controls for the Heart of the Sun',
+      'Corporal Clegg',
+      'A Saucerful of Secrets',
+      'See-Saw',
+      'Jugband Blues',
+    ],
   },
   {
     id: 3,
@@ -26,6 +49,21 @@ export const pinkFloydAlbunsArray: Array<Album> = [
     image:
       'https://upload.wikimedia.org/wikipedia/pt/thumb/7/70/More_-_Pink_Floyd_-_1969.jpg/220px-More_-_Pink_Floyd_-_1969.jpg',
     year: 1969,
+    playlist: [
+      'Cirrus Minor',
+      'The Nile',
+      'Crying Song',
+      'Up the',
+      'Green Is The Colour',
+      'Cymbaline"',
+      'Party Sequence',
+      'Main Theme',
+      'Ibiza Bar',
+      'More Blues',
+      'Quicksilver"',
+      'A Spanish',
+      'Dramatic Theme',
+    ],
   },
   {
     id: 4,
@@ -33,6 +71,17 @@ export const pinkFloydAlbunsArray: Array<Album> = [
     image:
       'https://upload.wikimedia.org/wikipedia/pt/thumb/1/15/Pink_Floyd_-_Ummagumma.jpg/220px-Pink_Floyd_-_Ummagumma.jpg',
     year: 1969,
+    playlist: [
+      'Sysyphus',
+      'Astronomy Domine',
+      'Grantchester Meadows',
+      'Several Species of Small Furry Animals Gathered Together in a Cave and Grooving with a Pict',
+      'Careful with That Axe, Eug',
+      'The Narrow Way',
+      'Set the Controls for the Heart of the Sun',
+      "The Grand Vizier's Garden Party",
+      'A Saucerful of Secre',
+    ],
   },
   {
     id: 5,
@@ -40,6 +89,13 @@ export const pinkFloydAlbunsArray: Array<Album> = [
     image:
       'https://upload.wikimedia.org/wikipedia/pt/d/d1/Pink_Floyd_-_Atom_Heart_Mother.jpg',
     year: 1970,
+    playlist: [
+      'Atom Heart Mother',
+      'If',
+      'Summer 68',
+      'Fat Old Sun',
+      "Alan's Psychedelic Breakfast",
+    ],
   },
   {
     id: 6,
