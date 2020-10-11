@@ -8,7 +8,7 @@ import AlbumDetail from '../pages/AlbumDetail';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Dashboard} />
-    <Route path="/album" component={AlbumDetail} />
+    <Route path="/album/:albumId" component={AlbumDetail} />
   </Switch>
 );
 

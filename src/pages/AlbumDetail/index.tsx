@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player/lazy';
 import {} from 'react-player';
+
+import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
 // interface YouTubePlayerProps {}
 
@@ -8,8 +10,24 @@ interface PlayerProps extends ReactPlayer {
   getInternalPlayer(): any;
 }
 
-const AlbumDetail: React.FC = () => {
+interface AlbumDetailProps {
+  albumId: number;
+}
+
+const AlbumDetail: React.FC<AlbumDetailProps> = ({ albumId }) => {
+  const [album, setAlbum] = useState({} as Album);
+
   const playerRef = useRef<PlayerProps>(null);
+
+  useEffect(() => {
+    const albumFromQueryParams = AlbumArray.filter(albumObject => {
+      return albumObject.id === albumId;
+    });
+
+    if (albumFromQueryParams) {
+      setAlbum(albumFromQueryParams[0]);
+    }
+  }, [albumId]);
 
   const showPlaylist = (): any => {
     console.log(playerRef?.current?.getInternalPlayer().getVideoData());

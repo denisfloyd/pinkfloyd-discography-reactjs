@@ -4,6 +4,7 @@ export interface Album {
   image: string;
   year: number;
   playlist?: Array<string>;
+  youtubeUrl?: string;
 }
 
 export const pinkFloydAlbunsArray: Array<Album> = [
@@ -26,6 +27,8 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'The Scarecrow',
       'Bike',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=uRG9CttHW68&list=PLpI6XGqHb_GQIHfInrgA5MWAufzWw5H9z',
   },
   {
     id: 2,
