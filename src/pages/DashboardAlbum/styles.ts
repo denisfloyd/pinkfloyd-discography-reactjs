@@ -18,6 +18,28 @@ export const Container = styled.main`
 
 export const ContainerDrawer = styled(Drawer)`
   overflow: hidden;
+
+  .MuiPaper-root {
+    background: transparent;
+  }
+
+  .MuiDrawer-paperAnchorDockedLeft {
+    border-right: 0;
+  }
+
+  .MuiPaper-root::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .MuiPaper-root::-webkit-scrollbar-track {
+    background: transparent;
+    border: 0;
+  }
+
+  .MuiPaper-root::-webkit-scrollbar-thumb {
+    background-color: #505050;
+    border-radius: 5px;
+  }
 `;
 
 export const DrawerHeader = styled.div`
@@ -30,6 +52,23 @@ export const DrawerHeader = styled.div`
 export const DrawerHeaderContainer = styled.div`
   display: flex;
   align-items: center;
+
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: var(#90a4ae) var(#cfd8dc);
+
+  ::-webkit-scrollbar-track {
+    background: var(#cfd8dc);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(#90a4ae);
+    border-radius: 6px;
+    border: 3px solid var(#cfd8dc);
+  }
 `;
 
 export const DrawerBackButton = styled(IconButton)``;
