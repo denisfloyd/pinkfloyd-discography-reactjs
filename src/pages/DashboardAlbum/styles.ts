@@ -1,7 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { IconButton } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
+
+interface AlbumsViewProps {
+  drawerOpen?: boolean;
+}
 
 export const Container = styled.main`
   position: relative;
@@ -120,11 +124,17 @@ export const Content = styled.div`
   }
 `;
 
-export const AlbumsView = styled.div`
+export const AlbumsView = styled.div<AlbumsViewProps>`
   max-width: 1600px;
   padding: 0 20px 40px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
+
+  ${props =>
+    props.drawerOpen &&
+    css`
+      margin-left: calc(255px - 20px);
+    `};
 `;

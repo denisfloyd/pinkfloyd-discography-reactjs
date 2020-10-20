@@ -68,7 +68,7 @@ const DashboardAlbum: React.FC = () => {
         </Content>
       </Container>
 
-      <AlbumsView>
+      <AlbumsView drawerOpen={toogleDrawer}>
         {pinkFloydAlbunsArray.map(album => (
           <AlbumCard key={album.id} album={album} />
         ))}

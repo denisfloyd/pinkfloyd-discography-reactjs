@@ -6,6 +6,10 @@ interface ContainerProps {
   isScrool?: boolean;
 }
 
+interface ContentProps {
+  drawerOpen?: boolean;
+}
+
 export const Container = styled.div<ContainerProps>`
   width: 100%;
   display: flex;
@@ -16,6 +20,8 @@ export const Container = styled.div<ContainerProps>`
   position: fixed;
   z-index: 1;
 
+  display: flex;
+
   transition: background-color 0.3s ease-in-out, padding 0.4s ease;
 
   ${props =>
@@ -23,7 +29,15 @@ export const Container = styled.div<ContainerProps>`
     css`
       background-color: #505050;
       padding: 20px;
-    `}
+    `};
+`;
+
+export const Content = styled.div<ContentProps>`
+  ${props =>
+    props.drawerOpen &&
+    css`
+      margin-left: calc(255px - 32px - 35px);
+    `};
 `;
 
 export const MenuButton = styled(IconButton)``;

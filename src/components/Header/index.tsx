@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import { Container, MenuButton, TextTitle } from './styles';
+import { Container, Content, MenuButton, TextTitle } from './styles';
 
 interface HeaderProps {
   userScroolDown: boolean;
@@ -23,7 +23,10 @@ const HeaderBar: React.FC<HeaderProps> = ({
       >
         <MenuIcon fontSize="large" style={{ color: '#fff' }} />
       </MenuButton>
-      <TextTitle>PINK FLOYD DISCOGRAPHY</TextTitle>
+
+      <Content drawerOpen={toogleDrawer}>
+        <TextTitle>PINK FLOYD DISCOGRAPHY</TextTitle>
+      </Content>
     </Container>
   );
 };
