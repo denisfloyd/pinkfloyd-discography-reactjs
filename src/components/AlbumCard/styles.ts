@@ -10,10 +10,9 @@ export const Container = styled.div`
   position: relative;
   height: 300px;
   width: 295px;
-  margin: 6px;
+  margin: 6px 10px 20px;
   overflow: hidden;
 
-  border-radius: 5px;
   box-shadow: 0 10px 20px rgba(180, 205, 237, 0.19),
     0 6px 6px rgba(180, 205, 237, 0.23);
 

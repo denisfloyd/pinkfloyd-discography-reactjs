@@ -75,6 +75,13 @@ const DashboardAlbum: React.FC = () => {
       </Container>
 
       <AlbumsView>
+        {/* <Album>
+          <strong>
+            All Games
+            <span>( 4 )</span>
+          </strong>
+        </h2> */}
+
         {pinkFloydAlbunsArray.map(album => (
           <AlbumCard key={album.id} album={album} />
         ))}

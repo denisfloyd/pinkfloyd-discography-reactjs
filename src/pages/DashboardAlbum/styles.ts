@@ -110,4 +110,42 @@ export const AlbumsView = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
+
+  /* h2 {
+    padding: 10px;
+    padding-left: 25px;
+    color: #ccc;
+    margin: 0;
+    position: relative;
+  }
+  h2 strong {
+    z-index: 2;
+    background: #24282f;
+    padding: 4px 8px;
+
+    position: relative;
+  }
+  h2 span {
+    font-size: 0.7em;
+    color: #aaa;
+    margin-left: 10px;
+  }
+
+  h2,
+  h2 strong,
+  h2 span {
+    vertical-align: middle;
+  }
+
+  h2:after {
+    position: absolute;
+    content: '';
+    z-index: 1;
+    bottom: 50%;
+    margin-bottom: -2px;
+    height: 2px;
+    left: 0;
+    right: 0;
+    background: #373d47;
+  } */
 `;
