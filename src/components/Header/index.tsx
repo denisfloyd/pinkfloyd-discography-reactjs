@@ -27,6 +27,8 @@ const HeaderBar: React.FC<HeaderProps> = ({
       <Content drawerOpen={toogleDrawer}>
         <TextTitle>PINK FLOYD DISCOGRAPHY</TextTitle>
       </Content>
+
+      <input type="text" placeholder="Album..." />
     </Container>
   );
 };

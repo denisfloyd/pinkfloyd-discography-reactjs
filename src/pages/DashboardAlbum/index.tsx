@@ -43,7 +43,7 @@ const DashboardAlbum: React.FC = () => {
         anchor="left"
         open={toogleDrawer}
         onClose={() => {
-          setToggleDrawer(!toogleDrawer);
+          setToggleDrawer(false);
         }}
       >
         <DrawerHeader>
@@ -69,9 +69,7 @@ const DashboardAlbum: React.FC = () => {
       </ContainerDrawer>
 
       <Container>
-        <Content>
-          <input type="text" placeholder="Album..." />
-        </Content>
+        <Content />
       </Container>
 
       <AlbumsView>

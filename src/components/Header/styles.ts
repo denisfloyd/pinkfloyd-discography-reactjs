@@ -16,7 +16,7 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 40px 20px;
+  padding: 35px 20px;
   position: fixed;
   z-index: 1;
 
@@ -30,6 +30,25 @@ export const Container = styled.div<ContainerProps>`
       background-color: ${props.theme.colors.primary};
       padding: 20px;
     `};
+
+  > input {
+    width: 260px;
+    height: 40px;
+    border: 1px solid ${props => props.theme.colors.text};
+    outline: 0;
+    padding: 0 14px;
+    border-radius: 25px;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 75%;
+
+    box-shadow: 0 10px 20px rgba(180, 205, 237, 0.19),
+      0 6px 6px rgba(180, 205, 237, 0.23);
+  }
 `;
 
 export const Content = styled.div<ContentProps>`
