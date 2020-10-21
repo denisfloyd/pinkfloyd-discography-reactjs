@@ -15,7 +15,7 @@ const HeaderBar: React.FC<HeaderProps> = ({
   toogleDrawer,
 }) => {
   return (
-    <Container isScrool={userScroolDown}>
+    <Container isScrool={userScroolDown} drawerOpen={toogleDrawer}>
       <MenuButton
         onClick={() => {
           handleOpenDrawer(!toogleDrawer);

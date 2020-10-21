@@ -12,7 +12,7 @@ import GlobalStyle from './styles/global';
 
 function App(): any {
   return (
-    <ThemeProvider theme={light}>
+    <ThemeProvider theme={dark}>
       <BrowserRouter>
         <Routes />
       </BrowserRouter>

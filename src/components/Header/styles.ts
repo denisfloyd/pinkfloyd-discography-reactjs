@@ -4,6 +4,7 @@ import { IconButton } from '@material-ui/core';
 
 interface ContainerProps {
   isScrool?: boolean;
+  drawerOpen?: boolean;
 }
 
 interface ContentProps {
@@ -16,7 +17,6 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   justify-content: flex-start;
   padding: 40px 20px;
-  background-color: transparent;
   position: fixed;
   z-index: 1;
 
@@ -25,9 +25,9 @@ export const Container = styled.div<ContainerProps>`
   transition: background-color 0.3s ease-in-out, padding 0.4s ease;
 
   ${props =>
-    props.isScrool &&
+    (props.isScrool || props.drawerOpen) &&
     css`
-      background-color: #505050;
+      background-color: ${props.theme.colors.primary};
       padding: 20px;
     `};
 `;
@@ -44,6 +44,5 @@ export const MenuButton = styled(IconButton)``;
 
 export const TextTitle = styled.div`
   font-weight: bold;
-  color: #fff;
   font-size: 20px;
 `;

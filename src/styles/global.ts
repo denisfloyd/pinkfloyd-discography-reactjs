@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   :root {
-    --drawer-width: 300;
+    --drawer-width: 255;
   }
 
   * {

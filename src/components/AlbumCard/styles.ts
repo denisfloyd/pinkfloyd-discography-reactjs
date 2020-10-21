@@ -14,7 +14,8 @@ export const Container = styled.div`
   overflow: hidden;
 
   border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 10px 20px rgba(180, 205, 237, 0.19),
+    0 6px 6px rgba(180, 205, 237, 0.23);
 
   &:hover .overview {
     transform: translateY(0);
@@ -41,7 +42,7 @@ export const Content = styled.div<ContentProps>`
 `;
 
 export const AlbumInfo = styled.div`
-  background-color: rgb(52, 34, 50, 0.9);
+  background-color: ${props => props.theme.colors.primaryTransparent};
   color: #fff;
   padding: 1rem;
   position: absolute;

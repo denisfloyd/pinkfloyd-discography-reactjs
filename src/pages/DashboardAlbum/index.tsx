@@ -39,7 +39,13 @@ const DashboardAlbum: React.FC = () => {
         handleOpenDrawer={setToggleDrawer}
         toogleDrawer={toogleDrawer}
       />
-      <ContainerDrawer anchor="left" open={toogleDrawer} variant="persistent">
+      <ContainerDrawer
+        anchor="left"
+        open={toogleDrawer}
+        onClose={() => {
+          setToggleDrawer(!toogleDrawer);
+        }}
+      >
         <DrawerHeader>
           <DrawerHeaderContainer>
             <DrawerBackButton
@@ -68,7 +74,7 @@ const DashboardAlbum: React.FC = () => {
         </Content>
       </Container>
 
-      <AlbumsView drawerOpen={toogleDrawer}>
+      <AlbumsView>
         {pinkFloydAlbunsArray.map(album => (
           <AlbumCard key={album.id} album={album} />
         ))}

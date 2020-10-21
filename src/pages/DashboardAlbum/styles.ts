@@ -3,10 +3,6 @@ import styled, { css } from 'styled-components';
 import { IconButton } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 
-interface AlbumsViewProps {
-  drawerOpen?: boolean;
-}
-
 export const Container = styled.main`
   position: relative;
   height: 20vh;
@@ -16,8 +12,6 @@ export const Container = styled.main`
   margin: 0;
   padding: 0;
   margin-bottom: 20px;
-
-  background: #202020;
 `;
 
 export const ContainerDrawer = styled(Drawer)`
@@ -41,14 +35,14 @@ export const ContainerDrawer = styled(Drawer)`
   }
 
   .MuiPaper-root::-webkit-scrollbar-thumb {
-    background-color: #505050;
+    background-color: ${props => props.theme.colors.secundary};
     border-radius: 5px;
   }
 `;
 
 export const DrawerHeader = styled.div`
   height: 100px;
-  background: #505050;
+  background: ${props => props.theme.colors.primary};
   display: flex;
   justify-content: flex-end;
 `;
@@ -56,23 +50,6 @@ export const DrawerHeader = styled.div`
 export const DrawerHeaderContainer = styled.div`
   display: flex;
   align-items: center;
-
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-
-  scrollbar-width: thin;
-  scrollbar-color: var(#90a4ae) var(#cfd8dc);
-
-  ::-webkit-scrollbar-track {
-    background: var(#cfd8dc);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(#90a4ae);
-    border-radius: 6px;
-    border: 3px solid var(#cfd8dc);
-  }
 `;
 
 export const DrawerBackButton = styled(IconButton)``;
@@ -83,9 +60,9 @@ export const DrawerAlbumItem = styled.li`
   align-items: center;
   justify-content: flex-start;
   padding: 5px;
-  background-color: #202020;
-  color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: ${props => props.theme.colors.background};
+  box-shadow: 0 4px 8px 0 rgba(180, 205, 237, 1),
+    0 6px 20px 0 rgba(180, 205, 237, 0.1);
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
 
@@ -98,10 +75,11 @@ export const DrawerAlbumItem = styled.li`
   p {
     margin-left: 0.5rem;
     text-transform: uppercase;
+    color: ${props => props.theme.colors.text};
   }
 
   &:hover {
-    background-color: #505050;
+    background-color: ${props => props.theme.colors.primary};
   }
 `;
 
@@ -115,26 +93,21 @@ export const Content = styled.div`
   > input {
     width: 260px;
     height: 40px;
-    border: 1px solid #fff;
+    border: 1px solid ${props => props.theme.colors.text};
     outline: 0;
     padding: 0 14px;
     border-radius: 25px;
 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 10px 20px rgba(180, 205, 237, 0.19),
+      0 6px 6px rgba(180, 205, 237, 0.23);
   }
 `;
 
-export const AlbumsView = styled.div<AlbumsViewProps>`
+export const AlbumsView = styled.div`
   max-width: 1600px;
   padding: 0 20px 40px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
-
-  ${props =>
-    props.drawerOpen &&
-    css`
-      margin-left: calc(255px - 20px);
-    `};
 `;
