@@ -12,6 +12,10 @@ import {
   AlbumInfo,
   AlbumCoverInfo,
   AlbumPlaylist,
+  PlayerContainer,
+  PlayerContent,
+  YoutubePlayer,
+  PlayerButtons,
 } from './styles';
 
 // interface YouTubePlayerProps {}
@@ -60,23 +64,40 @@ const AlbumDetail: React.FC = () => {
           <AlbumPlaylist>
             {album.playlist && (
               <ul>
-                {album.playlist.map(music => (
-                  <li>{music}</li>
+                {album.playlist.map((music, index) => (
+                  <li>
+                    <span>{index + 1}</span>
+                    <span>{music}</span>
+                  </li>
                 ))}
               </ul>
             )}
           </AlbumPlaylist>
         </AlbumInfo>
 
-        <ReactPlayer
-          ref={playerRef}
-          url="https://www.youtube.com/watch?v=nHER1RmSqA8&list=PL6ogdCG3tAWjWskN7Av6hzlVa9GE15ofK"
-          controls
-        />
+        <PlayerContainer>
+          <PlayerContent>
+            <YoutubePlayer
+              ref={playerRef}
+              url="https://www.youtube.com/watch?v=nHER1RmSqA8&list=PL6ogdCG3tAWjWskN7Av6hzlVa9GE15ofK"
+              controls
+            />
+          </PlayerContent>
 
-        <button type="button" onClick={showPlaylist}>
-          next
-        </button>
+          <PlayerButtons>
+            <button type="button" onClick={showPlaylist}>
+              previous
+            </button>
+
+            <button type="button" onClick={showPlaylist}>
+              pause
+            </button>
+
+            <button type="button" onClick={showPlaylist}>
+              next
+            </button>
+          </PlayerButtons>
+        </PlayerContainer>
       </Content>
     </Container>
     // <AlbumCover />
