@@ -83,7 +83,7 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'The Narrow Way',
       'Set the Controls for the Heart of the Sun',
       "The Grand Vizier's Garden Party",
-      'A Saucerful of Secre',
+      'A Saucerful of Secrets',
     ],
   },
   {

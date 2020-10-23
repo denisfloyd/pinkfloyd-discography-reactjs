@@ -6,7 +6,13 @@ import {} from 'react-player';
 
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
-import { Container } from './styles';
+import {
+  Container,
+  Content,
+  AlbumInfo,
+  AlbumCoverInfo,
+  AlbumPlaylist,
+} from './styles';
 
 // interface YouTubePlayerProps {}
 
@@ -29,7 +35,7 @@ const AlbumDetail: React.FC = () => {
 
   useEffect(() => {
     const albumFromQueryParams = AlbumArray.filter(albumObject => {
-      return albumObject.id === parseInt(albumId, 2);
+      return albumObject.id === parseInt(albumId);
     });
 
     if (albumFromQueryParams) {
@@ -44,30 +50,34 @@ const AlbumDetail: React.FC = () => {
 
   return (
     <Container>
-      {album.playlist && (
-        <ul>
-          {album.playlist.map(music => (
-            <li>{music}</li>
-          ))}
-        </ul>
-      )}
+      <Content>
+        <AlbumInfo>
+          <AlbumCoverInfo>
+            <img src={album.image} alt={album.name} />
+            <span>{album.name}</span>
+          </AlbumCoverInfo>
 
-      <ReactPlayer
-        ref={playerRef}
-        url="https://www.youtube.com/watch?v=nHER1RmSqA8&list=PL6ogdCG3tAWjWskN7Av6hzlVa9GE15ofK"
-        controls
-        // config={{
-        //   youtube: {
-        //     embedOptions: {
+          <AlbumPlaylist>
+            {album.playlist && (
+              <ul>
+                {album.playlist.map(music => (
+                  <li>{music}</li>
+                ))}
+              </ul>
+            )}
+          </AlbumPlaylist>
+        </AlbumInfo>
 
-        //     },
-        //   },
-        // }}
-      />
+        <ReactPlayer
+          ref={playerRef}
+          url="https://www.youtube.com/watch?v=nHER1RmSqA8&list=PL6ogdCG3tAWjWskN7Av6hzlVa9GE15ofK"
+          controls
+        />
 
-      <button type="button" onClick={showPlaylist}>
-        next
-      </button>
+        <button type="button" onClick={showPlaylist}>
+          next
+        </button>
+      </Content>
     </Container>
     // <AlbumCover />
   );
