@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, useHistory } from 'react-router-dom';
+
+import Button from '@material-ui/core/Button';
+import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 
 import ReactPlayer from 'react-player/lazy';
 import {} from 'react-player';
@@ -8,14 +11,14 @@ import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
 import {
   Container,
+  ButtonBack,
   Content,
   AlbumInfo,
   AlbumCoverInfo,
   AlbumPlaylist,
-  PlayerContainer,
-  PlayerContent,
   YoutubePlayer,
   PlayerButtons,
+  Footer,
 } from './styles';
 
 // interface YouTubePlayerProps {}
@@ -32,6 +35,8 @@ const AlbumDetail: React.FC = () => {
   const {
     params: { albumId },
   } = useRouteMatch<AlbumDetailProps>();
+
+  const history = useHistory();
 
   const [album, setAlbum] = useState({} as Album);
 
@@ -54,6 +59,17 @@ const AlbumDetail: React.FC = () => {
 
   return (
     <Container>
+      <ButtonBack
+        variant="contained"
+        size="medium"
+        startIcon={<KeyboardBackspaceRoundedIcon />}
+        onClick={() => {
+          history.push('');
+        }}
+      >
+        Voltar
+      </ButtonBack>
+
       <Content>
         <AlbumInfo>
           <AlbumCoverInfo>
@@ -75,30 +91,30 @@ const AlbumDetail: React.FC = () => {
           </AlbumPlaylist>
         </AlbumInfo>
 
-        <PlayerContainer>
-          <PlayerContent>
-            <YoutubePlayer
-              ref={playerRef}
-              url="https://www.youtube.com/watch?v=nHER1RmSqA8&list=PL6ogdCG3tAWjWskN7Av6hzlVa9GE15ofK"
-              controls
-            />
-          </PlayerContent>
-
-          <PlayerButtons>
-            <button type="button" onClick={showPlaylist}>
-              previous
-            </button>
-
-            <button type="button" onClick={showPlaylist}>
-              pause
-            </button>
-
-            <button type="button" onClick={showPlaylist}>
-              next
-            </button>
-          </PlayerButtons>
-        </PlayerContainer>
+        <YoutubePlayer
+          ref={playerRef}
+          width="0%"
+          height="0%"
+          url="https://www.youtube.com/watch?v=nHER1RmSqA8&list=PL6ogdCG3tAWjWskN7Av6hzlVa9GE15ofK"
+          controls
+        />
       </Content>
+
+      <Footer>
+        <PlayerButtons>
+          <button type="button" onClick={showPlaylist}>
+            previous
+          </button>
+
+          <button type="button" onClick={showPlaylist}>
+            pause
+          </button>
+
+          <button type="button" onClick={showPlaylist}>
+            next
+          </button>
+        </PlayerButtons>
+      </Footer>
     </Container>
     // <AlbumCover />
   );

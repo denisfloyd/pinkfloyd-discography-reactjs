@@ -1,11 +1,23 @@
 import styled from 'styled-components';
 
 import ReactPlayer from 'react-player/lazy';
+import Button from '@material-ui/core/Button';
 
 export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+`;
+
+export const ButtonBack = styled(Button)`
+  &.MuiButton-contained {
+    margin: 20px;
+    color: ${props => props.theme.colors.text};
+    background-color: transparent;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: ${props => props.theme.colors.primary};
+    }
+  }
 `;
 
 export const Content = styled.div`
@@ -17,7 +29,9 @@ export const Content = styled.div`
 `;
 
 export const AlbumInfo = styled.div`
-  max-width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const AlbumCoverInfo = styled.div`
@@ -25,6 +39,8 @@ export const AlbumCoverInfo = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  align-self: flex-start;
+  padding: 20px;
 
   > img {
     width: 200px;
@@ -40,8 +56,6 @@ export const AlbumCoverInfo = styled.div`
 `;
 
 export const AlbumPlaylist = styled.div`
-  margin-top: 30px;
-
   ul {
     list-style: none;
   }
@@ -66,21 +80,19 @@ export const AlbumPlaylist = styled.div`
   }
 `;
 
-export const PlayerContainer = styled.div`
-  padding: 20px;
-  display: flex;
-
-  flex-direction: column;
-`;
-
-export const PlayerContent = styled.div`
-  position: relative;
-`;
-
 export const YoutubePlayer = styled(ReactPlayer)``;
 
 export const PlayerButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const Footer = styled.footer`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
 `;
