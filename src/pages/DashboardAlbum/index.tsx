@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
@@ -53,16 +54,18 @@ const DashboardAlbum: React.FC = () => {
                 setToggleDrawer(!toogleDrawer);
               }}
             >
-              <ArrowBackIosIcon style={{ color: '#fff' }} />
+              <ArrowBackIosIcon />
             </DrawerBackButton>
           </DrawerHeaderContainer>
         </DrawerHeader>
 
         <ul>
           {pinkFloydAlbunsArray.map(album => (
-            <DrawerAlbumItem>
-              <img src={album.image} alt={album.name} />
-              <p>{album.name}</p>
+            <DrawerAlbumItem key={album.id}>
+              <Link to={`/album/${album.id}`}>
+                <img src={album.image} alt={album.name} />
+                <p>{album.name}</p>
+              </Link>
             </DrawerAlbumItem>
           ))}
         </ul>

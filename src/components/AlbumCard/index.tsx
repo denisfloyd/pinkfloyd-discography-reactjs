@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Album } from '../../data/info';
 
@@ -12,11 +13,13 @@ interface AlbumCardProps {
 const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
   return (
     <Container>
-      <Content cover={album.image} />
-      <AlbumInfo className="overview">
-        <h3>{album.name}</h3>
-        {album.year}
-      </AlbumInfo>
+      <Link to={`album/${album.id}`}>
+        <Content cover={album.image} />
+        <AlbumInfo className="overview">
+          <h3>{album.name}</h3>
+          {album.year}
+        </AlbumInfo>
+      </Link>
     </Container>
   );
 };

@@ -52,19 +52,25 @@ export const DrawerHeaderContainer = styled.div`
   align-items: center;
 `;
 
-export const DrawerBackButton = styled(IconButton)``;
+export const DrawerBackButton = styled(IconButton)`
+  color: ${props => props.theme.colors.text};
+`;
 
 export const DrawerAlbumItem = styled.li`
   width: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 5px;
   background-color: ${props => props.theme.colors.background};
   box-shadow: 0 4px 8px 0 rgba(180, 205, 237, 1),
     0 6px 20px 0 rgba(180, 205, 237, 0.1);
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
+
+  a {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+  }
 
   img {
     width: 42px;
