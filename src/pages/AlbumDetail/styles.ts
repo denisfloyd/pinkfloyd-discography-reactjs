@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import ReactPlayer from 'react-player/lazy';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 
 export const Container = styled.div`
   width: 100%;
@@ -108,7 +109,29 @@ export const PlayerButtons = styled.div`
   justify-content: center;
 `;
 
+export const PlayerButtonPlayPause = styled(IconButton)`
+  &.MuiIconButton-root {
+    color: green;
+  }
+
+  .MuiSvgIcon-root {
+    font-size: 65px;
+  }
+`;
+
+export const PlayerButtonNavigation = styled(IconButton)`
+  &.MuiIconButton-root {
+    color: ${props => props.theme.colors.text};
+  }
+
+  .MuiSvgIcon-root {
+    font-size: 50px;
+  }
+`;
+
 export const Footer = styled.footer`
+  background-color: ${props => props.theme.colors.secundary};
+
   position: fixed;
   left: 0;
   bottom: 0;

@@ -3,6 +3,8 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
+import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
+import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
 
 import ReactPlayer from 'react-player/lazy';
 import {} from 'react-player';
@@ -18,6 +20,8 @@ import {
   AlbumPlaylist,
   YoutubePlayer,
   PlayerButtons,
+  PlayerButtonPlayPause,
+  PlayerButtonNavigation,
   Footer,
 } from './styles';
 
@@ -104,17 +108,17 @@ const AlbumDetail: React.FC = () => {
 
       <Footer>
         <PlayerButtons>
-          <button type="button" onClick={showPlaylist}>
-            previous
-          </button>
+          <PlayerButtonNavigation onClick={showPlaylist}>
+            <NavigateBeforeRoundedIcon />
+          </PlayerButtonNavigation>
 
-          <button type="button" onClick={showPlaylist}>
-            pause
-          </button>
+          <PlayerButtonPlayPause onClick={showPlaylist}>
+            <PlayCircleOutlineRoundedIcon />
+          </PlayerButtonPlayPause>
 
-          <button type="button" onClick={showPlaylist}>
-            next
-          </button>
+          <PlayerButtonNavigation onClick={showPlaylist}>
+            <NavigateNextRoundedIcon />
+          </PlayerButtonNavigation>
         </PlayerButtons>
       </Footer>
     </Container>
