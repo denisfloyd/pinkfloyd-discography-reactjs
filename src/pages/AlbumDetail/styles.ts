@@ -21,7 +21,6 @@ export const ButtonBack = styled(Button)`
 `;
 
 export const Content = styled.div`
-  max-width: 1200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,9 +28,12 @@ export const Content = styled.div`
 `;
 
 export const AlbumInfo = styled.div`
+  width: 1200px;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 export const AlbumCoverInfo = styled.div`
@@ -48,34 +50,52 @@ export const AlbumCoverInfo = styled.div`
   }
 
   > span {
-    margin-top: 10px;
+    font-size: 16px;
     text-transform: uppercase;
-    font-size: 18px;
-    font-weight: 600;
+
+    &:first-of-type {
+      margin-top: 10px;
+      text-transform: capitalize;
+      font-size: 20px;
+      font-weight: 600;
+    }
   }
 `;
 
 export const AlbumPlaylist = styled.div`
+  flex: 1;
+  min-width: 200px;
+
   ul {
     list-style: none;
   }
 
   li {
-    line-height: 30px;
+    padding: 5px;
+    line-height: 26px;
 
     display: grid;
-    grid-template-columns: 25px 2fr;
+    grid-template-columns: 25px 3fr auto;
+
+    transition: background-color 0.2s ease-in-out;
 
     span {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
 
-      max-width: 350px;
+    svg {
+      opacity: 0;
+      cursor: pointer;
     }
 
     &:hover {
-      background-color: #505050;
+      background-color: ${props => props.theme.colors.primary};
+
+      svg {
+        opacity: 1;
+      }
     }
   }
 `;

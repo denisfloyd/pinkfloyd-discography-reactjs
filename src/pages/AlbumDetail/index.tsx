@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 
-import Button from '@material-ui/core/Button';
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
+import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
 
 import ReactPlayer from 'react-player/lazy';
 import {} from 'react-player';
@@ -75,6 +75,7 @@ const AlbumDetail: React.FC = () => {
           <AlbumCoverInfo>
             <img src={album.image} alt={album.name} />
             <span>{album.name}</span>
+            <span>Pink Floyd</span>
           </AlbumCoverInfo>
 
           <AlbumPlaylist>
@@ -84,6 +85,7 @@ const AlbumDetail: React.FC = () => {
                   <li>
                     <span>{index + 1}</span>
                     <span>{music}</span>
+                    <PlayCircleOutlineRoundedIcon />
                   </li>
                 ))}
               </ul>
@@ -95,7 +97,7 @@ const AlbumDetail: React.FC = () => {
           ref={playerRef}
           width="0%"
           height="0%"
-          url="https://www.youtube.com/watch?v=nHER1RmSqA8&list=PL6ogdCG3tAWjWskN7Av6hzlVa9GE15ofK"
+          url={album.youtubeUrl}
           controls
         />
       </Content>
@@ -116,7 +118,6 @@ const AlbumDetail: React.FC = () => {
         </PlayerButtons>
       </Footer>
     </Container>
-    // <AlbumCover />
   );
 };
 
