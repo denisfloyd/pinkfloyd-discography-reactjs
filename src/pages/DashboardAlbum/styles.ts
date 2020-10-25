@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { IconButton } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';

@@ -111,7 +111,7 @@ export const PlayerButtons = styled.div`
 
 export const PlayerButtonPlayPause = styled(IconButton)`
   &.MuiIconButton-root {
-    color: green;
+    color: ${props => props.theme.colors.text};
   }
 
   .MuiSvgIcon-root {
@@ -130,7 +130,7 @@ export const PlayerButtonNavigation = styled(IconButton)`
 `;
 
 export const Footer = styled.footer`
-  background-color: ${props => props.theme.colors.secundary};
+  background-color: ${props => props.theme.colors.primary};
 
   position: fixed;
   left: 0;
