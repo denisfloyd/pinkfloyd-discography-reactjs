@@ -139,7 +139,7 @@ export const VolumeContainer = styled.div`
   justify-content: center;
 
   min-width: 200px;
-  margin: 0 300px;
+  margin-left: 500px;
 
   .MuiSlider-colorPrimary {
     color: ${props => props.theme.colors.secundary};
@@ -160,5 +160,5 @@ export const Footer = styled.footer`
 
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 `;

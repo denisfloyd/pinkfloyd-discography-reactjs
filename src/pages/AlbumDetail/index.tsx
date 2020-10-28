@@ -3,6 +3,7 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
+import PauseCircleOutlineRounded from '@material-ui/icons/PauseCircleOutlineRounded';
 import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
 import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
 
@@ -46,6 +47,7 @@ const AlbumDetail: React.FC = () => {
   } = useRouteMatch<AlbumDetailProps>();
 
   const [volumePlayer, setVolumePlayer] = useState(0.5);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const history = useHistory();
 
@@ -93,7 +95,7 @@ const AlbumDetail: React.FC = () => {
             {album.playlist && (
               <ul>
                 {album.playlist.map((music, index) => (
-                  <li>
+                  <li key={music}>
                     <span>{index + 1}</span>
                     <span>{music}</span>
                     <PlayCircleOutlineRoundedIcon />
@@ -109,6 +111,8 @@ const AlbumDetail: React.FC = () => {
           width="0%"
           height="0%"
           url={album.youtubeUrl}
+          playing={isPlaying}
+          volume={volumePlayer}
           controls
         />
       </Content>
@@ -119,8 +123,16 @@ const AlbumDetail: React.FC = () => {
             <NavigateBeforeRoundedIcon />
           </PlayerButtonNavigation>
 
-          <PlayerButtonPlayPause onClick={showPlaylist}>
-            <PlayCircleOutlineRoundedIcon />
+          <PlayerButtonPlayPause
+            onClick={() => {
+              setIsPlaying(!isPlaying);
+            }}
+          >
+            {isPlaying ? (
+              <PauseCircleOutlineRounded />
+            ) : (
+              <PlayCircleOutlineRoundedIcon />
+            )}
           </PlayerButtonPlayPause>
 
           <PlayerButtonNavigation onClick={showPlaylist}>
@@ -129,7 +141,11 @@ const AlbumDetail: React.FC = () => {
         </PlayerButtons>
 
         <VolumeContainer>
-          <VolumeDown />
+          <VolumeDown
+            onClick={() => {
+              setVolumePlayer(0);
+            }}
+          />
           <Slider
             step={0.001}
             max={1}
@@ -142,7 +158,11 @@ const AlbumDetail: React.FC = () => {
             aria-labelledby="continuous-slider"
           />
 
-          <VolumeUp />
+          <VolumeUp
+            onClick={() => {
+              setVolumePlayer(1);
+            }}
+          />
         </VolumeContainer>
       </Footer>
     </Container>
