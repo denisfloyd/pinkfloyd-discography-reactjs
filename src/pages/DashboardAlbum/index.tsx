@@ -59,7 +59,6 @@ const DashboardAlbum: React.FC = () => {
           </DrawerHeaderContainer>
         </DrawerHeader>
 
-        <ul>
           {pinkFloydAlbunsArray.map(album => (
             <DrawerAlbumItem key={album.id}>
               <Link to={`/album/${album.id}`}>
@@ -68,7 +67,6 @@ const DashboardAlbum: React.FC = () => {
               </Link>
             </DrawerAlbumItem>
           ))}
-        </ul>
       </ContainerDrawer>
 
       <Container>
