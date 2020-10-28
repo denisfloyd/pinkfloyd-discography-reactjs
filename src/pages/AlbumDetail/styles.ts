@@ -129,6 +129,14 @@ export const PlayerButtonNavigation = styled(IconButton)`
   }
 `;
 
+export const VolumeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 200px;
+`;
+
 export const Footer = styled.footer`
   background-color: ${props => props.theme.colors.primary};
 
@@ -138,4 +146,8 @@ export const Footer = styled.footer`
   width: 100%;
   color: white;
   text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

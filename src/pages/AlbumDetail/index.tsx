@@ -6,9 +6,13 @@ import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRo
 import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
 import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
 
+import VolumeDown from '@material-ui/icons/VolumeDown';
+import VolumeUp from '@material-ui/icons/VolumeUp';
+
 import ReactPlayer from 'react-player/lazy';
 import {} from 'react-player';
 
+import { Slider } from '@material-ui/core';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
 import {
@@ -22,6 +26,7 @@ import {
   PlayerButtons,
   PlayerButtonPlayPause,
   PlayerButtonNavigation,
+  VolumeContainer,
   Footer,
 } from './styles';
 
@@ -39,6 +44,8 @@ const AlbumDetail: React.FC = () => {
   const {
     params: { albumId },
   } = useRouteMatch<AlbumDetailProps>();
+
+  const [volumePlayer, setVolumePlayer] = useState(0.5);
 
   const history = useHistory();
 
@@ -120,6 +127,22 @@ const AlbumDetail: React.FC = () => {
             <NavigateNextRoundedIcon />
           </PlayerButtonNavigation>
         </PlayerButtons>
+
+        <VolumeContainer>
+          <VolumeDown />
+          <Slider
+            step={0.001}
+            max={1}
+            min={0}
+            value={volumePlayer}
+            onChange={(event: any, newValue: number | number[]) => {
+              setVolumePlayer(newValue as number);
+            }}
+            aria-labelledby="continuous-slider"
+          />
+
+          <VolumeUp />
+        </VolumeContainer>
       </Footer>
     </Container>
   );
