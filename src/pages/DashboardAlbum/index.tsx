@@ -59,14 +59,16 @@ const DashboardAlbum: React.FC = () => {
           </DrawerHeaderContainer>
         </DrawerHeader>
 
-          {pinkFloydAlbunsArray.map(album => (
+        {pinkFloydAlbunsArray.map(album => (
+          <ul>
             <DrawerAlbumItem key={album.id}>
               <Link to={`/album/${album.id}`}>
                 <img src={album.image} alt={album.name} />
                 <p>{album.name}</p>
               </Link>
             </DrawerAlbumItem>
-          ))}
+          </ul>
+        ))}
       </ContainerDrawer>
 
       <Container>

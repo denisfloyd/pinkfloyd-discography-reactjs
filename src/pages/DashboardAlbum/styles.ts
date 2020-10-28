@@ -38,6 +38,10 @@ export const ContainerDrawer = styled(Drawer)`
     background-color: ${props => props.theme.colors.secundary};
     border-radius: 5px;
   }
+
+  .MuiDrawer-paper {
+    display: inline;
+  }
 `;
 
 export const DrawerHeader = styled.div`
@@ -45,10 +49,6 @@ export const DrawerHeader = styled.div`
   background: ${props => props.theme.colors.primary};
   display: flex;
   justify-content: flex-end;
-
-  &.MuiDrawer-paper {
-    display: inline;
-  }
 `;
 
 export const DrawerHeaderContainer = styled.div`
@@ -60,12 +60,13 @@ export const DrawerBackButton = styled(IconButton)`
   color: ${props => props.theme.colors.text};
 `;
 
-export const DrawerAlbumItem = styled.div`
+export const DrawerAlbumItem = styled.li`
   width: 250px;
   background-color: ${props => props.theme.colors.background};
   box-shadow: 0 4px 8px 0 rgba(180, 205, 237, 1),
     0 6px 20px 0 rgba(180, 205, 237, 0.1);
   transition: background-color 0.2s ease-in-out;
+  list-style: none;
   cursor: pointer;
 
   a {
