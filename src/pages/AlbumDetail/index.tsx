@@ -134,6 +134,7 @@ const AlbumDetail: React.FC = () => {
             step={0.001}
             max={1}
             min={0}
+            defaultValue={0.5}
             value={volumePlayer}
             onChange={(event: any, newValue: number | number[]) => {
               setVolumePlayer(newValue as number);

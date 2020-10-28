@@ -107,6 +107,10 @@ export const PlayerButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
 `;
 
 export const PlayerButtonPlayPause = styled(IconButton)`
@@ -135,10 +139,17 @@ export const VolumeContainer = styled.div`
   justify-content: center;
 
   min-width: 200px;
+  margin: 0 300px;
+
+  .MuiSlider-colorPrimary {
+    color: ${props => props.theme.colors.secundary};
+  }
 `;
 
 export const Footer = styled.footer`
   background-color: ${props => props.theme.colors.primary};
+
+  height: 100px;
 
   position: fixed;
   left: 0;
@@ -149,5 +160,5 @@ export const Footer = styled.footer`
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 `;
