@@ -49,6 +49,7 @@ export const DrawerHeader = styled.div`
   &.MuiDrawer-paper {
     display: inline;
   }
+
 `;
 
 export const DrawerHeaderContainer = styled.div`
