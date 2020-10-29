@@ -274,6 +274,8 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Lost for Words',
       'High Hopes',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=4HLaOmiwV5Q&list=PLsVoIP7pW8g984pIJuKXhY9tTG1DiJWY9',
   },
   {
     id: 15,
