@@ -28,13 +28,17 @@ import {
   PlayerButtonPlayPause,
   PlayerButtonNavigation,
   VolumeContainer,
+  PlayerButtonVolume,
   Footer,
 } from './styles';
 
-// interface YouTubePlayerProps {}
+interface YouTubePlayerProps {
+  nextVideo(): void;
+  previousVideo: void;
+}
 
 interface PlayerProps extends ReactPlayer {
-  getInternalPlayer(): any;
+  getInternalPlayer(): YouTubePlayerProps;
 }
 
 interface AlbumDetailProps {
@@ -65,8 +69,7 @@ const AlbumDetail: React.FC = () => {
     }
   }, [albumId]);
 
-  const showPlaylist = (): any => {
-    // console.log(playerRef?.current?.getInternalPlayer().getVideoData());
+  const showPlaylist = (): void => {
     return playerRef.current?.getInternalPlayer().nextVideo();
   };
 
@@ -114,6 +117,11 @@ const AlbumDetail: React.FC = () => {
           playing={isPlaying}
           volume={volumePlayer}
           controls
+          // config={{
+          //   youtube: {
+          //     playerVars: { autoplay: 1 },
+          //   },
+          // }}
         />
       </Content>
 
@@ -141,11 +149,13 @@ const AlbumDetail: React.FC = () => {
         </PlayerButtons>
 
         <VolumeContainer>
-          <VolumeDown
+          <PlayerButtonVolume
             onClick={() => {
               setVolumePlayer(0);
             }}
-          />
+          >
+            <VolumeDown />
+          </PlayerButtonVolume>
           <Slider
             step={0.001}
             max={1}
@@ -158,11 +168,13 @@ const AlbumDetail: React.FC = () => {
             aria-labelledby="continuous-slider"
           />
 
-          <VolumeUp
+          <PlayerButtonVolume
             onClick={() => {
               setVolumePlayer(1);
             }}
-          />
+          >
+            <VolumeUp />
+          </PlayerButtonVolume>
         </VolumeContainer>
       </Footer>
     </Container>

@@ -103,6 +103,23 @@ export const AlbumPlaylist = styled.div`
 
 export const YoutubePlayer = styled(ReactPlayer)``;
 
+export const Footer = styled.footer`
+  background-color: ${props => props.theme.colors.primary};
+
+  height: 100px;
+
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const PlayerButtons = styled.div`
   display: flex;
   align-items: center;
@@ -146,19 +163,8 @@ export const VolumeContainer = styled.div`
   }
 `;
 
-export const Footer = styled.footer`
-  background-color: ${props => props.theme.colors.primary};
-
-  height: 100px;
-
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: white;
-  text-align: center;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const PlayerButtonVolume = styled(IconButton)`
+  &.MuiIconButton-root {
+    color: ${props => props.theme.colors.text};
+  }
 `;
