@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
@@ -34,7 +34,7 @@ import {
 
 interface YouTubePlayerProps {
   nextVideo(): void;
-  previousVideo: void;
+  previousVideo(): void;
 }
 
 interface PlayerProps extends ReactPlayer {
@@ -69,9 +69,13 @@ const AlbumDetail: React.FC = () => {
     }
   }, [albumId]);
 
-  const showPlaylist = (): void => {
+  const nextSong = useCallback(() => {
     return playerRef.current?.getInternalPlayer().nextVideo();
-  };
+  }, []);
+
+  const previousSong = useCallback(() => {
+    return playerRef.current?.getInternalPlayer().previousVideo();
+  }, []);
 
   return (
     <Container>
@@ -127,7 +131,7 @@ const AlbumDetail: React.FC = () => {
 
       <Footer>
         <PlayerButtons>
-          <PlayerButtonNavigation onClick={showPlaylist}>
+          <PlayerButtonNavigation onClick={previousSong}>
             <NavigateBeforeRoundedIcon />
           </PlayerButtonNavigation>
 
@@ -143,7 +147,7 @@ const AlbumDetail: React.FC = () => {
             )}
           </PlayerButtonPlayPause>
 
-          <PlayerButtonNavigation onClick={showPlaylist}>
+          <PlayerButtonNavigation onClick={nextSong}>
             <NavigateNextRoundedIcon />
           </PlayerButtonNavigation>
         </PlayerButtons>
