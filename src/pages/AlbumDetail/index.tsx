@@ -59,6 +59,8 @@ const AlbumDetail: React.FC = () => {
 
   const playerRef = useRef<PlayerProps>(null);
 
+  // TESTE
+
   useEffect(() => {
     const albumFromQueryParams = AlbumArray.filter(albumObject => {
       return albumObject.id === parseInt(albumId);
