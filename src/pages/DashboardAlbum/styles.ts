@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { IconButton } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 
+import { shade } from 'polished';
+
 export const Container = styled.main`
   position: relative;
   height: 20vh;
@@ -63,14 +65,15 @@ export const DrawerBackButton = styled(IconButton)`
 export const DrawerAlbumItem = styled.li`
   width: 250px;
   background-color: ${props => props.theme.colors.background};
-  box-shadow: 0 4px 8px 0 rgba(180, 205, 237, 1),
-    0 6px 20px 0 rgba(180, 205, 237, 0.1);
+  box-shadow: 0 4px 8px 0 ${props => props.theme.colors.secundary},
+    0 6px 20px 0 ${props => shade(0.4, props.theme.colors.secundary)};
   transition: background-color 0.2s ease-in-out;
   list-style: none;
   cursor: pointer;
+  padding: 5px;
+  margin: 0 5px 0 0;
 
   a {
-    padding: 5px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -109,8 +112,9 @@ export const Content = styled.div`
     padding: 0 14px;
     border-radius: 25px;
 
-    box-shadow: 0 10px 20px rgba(180, 205, 237, 0.19),
-      0 6px 6px rgba(180, 205, 237, 0.23);
+    box-shadow: 0 10px 20px
+        ${props => shade(0.19, props.theme.colors.secundary)},
+      0 6px 6px ${props => shade(0.23, props.theme.colors.secundary)};
   }
 `;
 
@@ -121,42 +125,4 @@ export const AlbumsView = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
-
-  /* h2 {
-    padding: 10px;
-    padding-left: 25px;
-    color: #ccc;
-    margin: 0;
-    position: relative;
-  }
-  h2 strong {
-    z-index: 2;
-    background: #24282f;
-    padding: 4px 8px;
-
-    position: relative;
-  }
-  h2 span {
-    font-size: 0.7em;
-    color: #aaa;
-    margin-left: 10px;
-  }
-
-  h2,
-  h2 strong,
-  h2 span {
-    vertical-align: middle;
-  }
-
-  h2:after {
-    position: absolute;
-    content: '';
-    z-index: 1;
-    bottom: 50%;
-    margin-bottom: -2px;
-    height: 2px;
-    left: 0;
-    right: 0;
-    background: #373d47;
-  } */
 `;

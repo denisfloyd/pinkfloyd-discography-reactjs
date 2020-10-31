@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { shade } from 'polished';
+
 interface ContentProps {
   cover: string;
   name?: string;
@@ -13,11 +15,18 @@ export const Container = styled.div`
   margin: 6px 10px 20px;
   overflow: hidden;
 
-  box-shadow: 0 10px 20px rgba(180, 205, 237, 0.19),
-    0 6px 6px rgba(180, 205, 237, 0.23);
+  transition: all 0.5s ease-in-out;
 
-  &:hover .overview {
-    transform: translateY(0);
+  &:hover {
+    box-shadow: 0 10px 20px
+        ${props => shade(0.19, props.theme.colors.secundary)},
+      0 6px 6px ${props => shade(0.23, props.theme.colors.secundary)};
+
+    transform: scale(1.02);
+
+    .overview {
+      transform: translateY(0);
+    }
   }
 `;
 
@@ -31,11 +40,6 @@ export const Content = styled.div<ContentProps>`
   width: 100%;
 
   background-size: 100% 100%;
-  transition: transform 0.5s ease-in-out;
-
-  &:hover {
-    transform: scale(1.02);
-  }
 
   cursor: pointer;
 `;
