@@ -1,7 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import HeaderBar from '../../components/Header';
 import AlbumCard from '../../components/AlbumCard';
@@ -22,7 +25,33 @@ import {
 const DashboardAlbum: React.FC = () => {
   const [toogleDrawer, setToggleDrawer] = useState(false);
 
+  // Album variables
+  const [albumList, setAlbumList] = useState(pinkFloydAlbunsArray);
+  const [albumFilter, setAlbumFilter] = useState('');
+
   const [userScrollDown, setUserScrollDown] = useState(false);
+
+  const debounce: Subject<string> = new Subject<string>();
+
+  useEffect(() => {
+    debounce
+      .pipe(debounceTime(300))
+      .subscribe(filter => setAlbumFilter(filter));
+
+    return () => {
+      debounce.unsubscribe();
+    };
+  }, [debounce]);
+
+  useEffect(() => {
+    setAlbumList(
+      albumFilter === ''
+        ? pinkFloydAlbunsArray
+        : pinkFloydAlbunsArray.filter(album => {
+            return album.name.includes(albumFilter);
+          }),
+    );
+  }, [albumFilter]);
 
   const handleScrollScreen = useCallback(() => {
     if (window.scrollY > 60) {
@@ -83,7 +112,7 @@ const DashboardAlbum: React.FC = () => {
           </strong>
         </h2> */}
 
-        {pinkFloydAlbunsArray.map(album => (
+        {albumList.map(album => (
           <AlbumCard key={album.id} album={album} />
         ))}
       </AlbumsView>

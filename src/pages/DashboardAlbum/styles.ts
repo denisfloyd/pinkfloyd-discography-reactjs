@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { IconButton } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 
-import { shade } from 'polished';
+import { transparentize } from 'polished';
 
 export const Container = styled.main`
   position: relative;
@@ -65,8 +65,9 @@ export const DrawerBackButton = styled(IconButton)`
 export const DrawerAlbumItem = styled.li`
   width: 250px;
   background-color: ${props => props.theme.colors.background};
-  box-shadow: 0 4px 8px 0 ${props => props.theme.colors.secundary},
-    0 6px 20px 0 ${props => shade(0.4, props.theme.colors.secundary)};
+  box-shadow: 0 4px 8px 0
+      ${props => transparentize(0.81, props.theme.colors.secundary)},
+    0 6px 20px 0 ${props => transparentize(0.76, props.theme.colors.secundary)};
   transition: background-color 0.2s ease-in-out;
   list-style: none;
   cursor: pointer;
@@ -113,8 +114,8 @@ export const Content = styled.div`
     border-radius: 25px;
 
     box-shadow: 0 10px 20px
-        ${props => shade(0.19, props.theme.colors.secundary)},
-      0 6px 6px ${props => shade(0.23, props.theme.colors.secundary)};
+        ${props => transparentize(0.81, props.theme.colors.secundary)},
+      0 6px 6px ${props => transparentize(0.76, props.theme.colors.secundary)};
   }
 `;
 

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { shade } from 'polished';
+import { transparentize } from 'polished';
 
 interface ContentProps {
   cover: string;
@@ -19,8 +19,8 @@ export const Container = styled.div`
 
   &:hover {
     box-shadow: 0 10px 20px
-        ${props => shade(0.19, props.theme.colors.secundary)},
-      0 6px 6px ${props => shade(0.23, props.theme.colors.secundary)};
+        ${props => transparentize(0.2, props.theme.colors.secundary)},
+      0 6px 6px ${props => transparentize(0.76, props.theme.colors.secundary)};
 
     transform: scale(1.02);
 

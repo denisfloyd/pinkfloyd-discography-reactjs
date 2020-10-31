@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { IconButton } from '@material-ui/core';
+import { transparentize } from 'polished';
 
 interface ContainerProps {
   isScrool?: boolean;
@@ -46,8 +47,9 @@ export const Container = styled.div<ContainerProps>`
     margin-right: auto;
     top: 75%;
 
-    box-shadow: 0 10px 20px rgba(180, 205, 237, 0.19),
-      0 6px 6px rgba(180, 205, 237, 0.23);
+    box-shadow: 0 10px 20px
+        ${props => transparentize(0.81, props.theme.colors.secundary)},
+      0 6px 6px ${props => transparentize(0.76, props.theme.colors.secundary)};
   }
 `;
 
