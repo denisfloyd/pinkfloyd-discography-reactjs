@@ -12,13 +12,13 @@ import AlbumCard from '../../components/AlbumCard';
 import { pinkFloydAlbunsArray } from '../../data/info';
 
 import {
+  Container,
+  SearchInput,
   ContainerDrawer,
   DrawerHeader,
   DrawerHeaderContainer,
   DrawerBackButton,
   DrawerAlbumItem,
-  Container,
-  Content,
   AlbumsView,
 } from './styles';
 
@@ -63,12 +63,14 @@ const DashboardAlbum: React.FC = () => {
   window.addEventListener('scroll', handleScrollScreen);
 
   return (
-    <>
+    <Container>
       <HeaderBar
         userScroolDown={userScrollDown}
         handleOpenDrawer={setToggleDrawer}
         toogleDrawer={toogleDrawer}
-      />
+      >
+        <SearchInput type="text" placeholder="Album..." />
+      </HeaderBar>
       <ContainerDrawer
         anchor="left"
         open={toogleDrawer}
@@ -100,10 +102,6 @@ const DashboardAlbum: React.FC = () => {
         </ul>
       </ContainerDrawer>
 
-      <Container>
-        <Content />
-      </Container>
-
       <AlbumsView>
         {/* <Album>
           <strong>
@@ -116,7 +114,7 @@ const DashboardAlbum: React.FC = () => {
           <AlbumCard key={album.id} album={album} />
         ))}
       </AlbumsView>
-    </>
+    </Container>
   );
 };
 

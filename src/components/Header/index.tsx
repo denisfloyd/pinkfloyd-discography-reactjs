@@ -13,6 +13,7 @@ const HeaderBar: React.FC<HeaderProps> = ({
   userScroolDown,
   handleOpenDrawer,
   toogleDrawer,
+  children,
 }) => {
   return (
     <Container isScrool={userScroolDown} drawerOpen={toogleDrawer}>
@@ -28,7 +29,7 @@ const HeaderBar: React.FC<HeaderProps> = ({
         <TextTitle>PINK FLOYD DISCOGRAPHY</TextTitle>
       </Content>
 
-      <input type="text" placeholder="Album..." />
+      {children}
     </Container>
   );
 };
