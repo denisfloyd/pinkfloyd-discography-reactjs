@@ -59,7 +59,9 @@ export const DrawerHeaderContainer = styled.div`
 `;
 
 export const DrawerBackButton = styled(IconButton)`
-  color: ${props => props.theme.colors.text};
+  &.MuiIconButton-root {
+    color: ${props => props.theme.colors.text};
+  }
 `;
 
 export const DrawerAlbumItem = styled.li`
