@@ -45,6 +45,8 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'See-Saw',
       'Jugband Blues',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=fcFrivOpCwc&list=PLn_HrLivU4eraqCFUNlxVj_V2BmVXiLBe',
   },
   {
     id: 3,
@@ -67,6 +69,8 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'A Spanish',
       'Dramatic Theme',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=GfPVM5dFlp8&list=PLfimnwaZdumi4h5H4u9UTGqkDbmYPrhuD',
   },
   {
     id: 4,
@@ -75,16 +79,25 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'https://upload.wikimedia.org/wikipedia/pt/thumb/1/15/Pink_Floyd_-_Ummagumma.jpg/220px-Pink_Floyd_-_Ummagumma.jpg',
     year: 1969,
     playlist: [
-      'Sysyphus',
       'Astronomy Domine',
+      'Careful with That Axe, Eug',
+      'Set the Controls for the Heart of the Sun',
+      'A Saucerful of Secrets',
+      'Sysyphus Part I',
+      'Sysyphus Part II',
+      'Sysyphus Part III',
+      'Sysyphus Part IV',
       'Grantchester Meadows',
       'Several Species of Small Furry Animals Gathered Together in a Cave and Grooving with a Pict',
-      'Careful with That Axe, Eug',
-      'The Narrow Way',
-      'Set the Controls for the Heart of the Sun',
-      "The Grand Vizier's Garden Party",
-      'A Saucerful of Secrets',
+      'The Narrow Way Part I',
+      'The Narrow Way Part II',
+      'The Narrow Way Part III',
+      "The Grand Vizier's Garden Party Part I",
+      "The Grand Vizier's Garden Party Part II",
+      "The Grand Vizier's Garden Party Part III",
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=QawLRFL0Js0&list=PL6ogdCG3tAWhcv701QjwZWt3iXQxjKK3Y',
   },
   {
     id: 5,
@@ -98,7 +111,10 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Summer 68',
       'Fat Old Sun',
       "Alan's Psychedelic Breakfast",
+      'Remergence',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=wkLEu4Ko6Vg&list=PL64J65wgDdneRUw3eRfXs0I-5Ykx3nXbr&index=6',
   },
   {
     id: 6,
@@ -112,7 +128,10 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Fearless',
       'San Tropez',
       'Seamus',
+      'Echoes',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=48PJGVf4xqk&list=PL5aWbCMRfsdj_qmErmIrVjHYKNtxZz0Rv',
   },
   {
     id: 7,
@@ -132,6 +151,8 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Stay',
       'Absolutely Curtains',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=16V-wNwlTw0&list=PLfimnwaZdumgNU2Y_8SpLJHg0-xmHWWtX',
   },
   {
     id: 8,
@@ -151,6 +172,8 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Brain Damage',
       'Eclipse',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=HW-lXjOyUWo&list=PL3PhWT10BW3Urh8ZXXpuU9h526ChwgWKy',
   },
   {
     id: 9,
@@ -159,12 +182,16 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'https://upload.wikimedia.org/wikipedia/pt/b/b7/Wish_You_Were_Here.jpg',
     year: 1975,
     playlist: [
-      'Shine On You Crazy Diamond',
+      'Shine On You Crazy Diamond Part I',
+      'Shine On You Crazy Diamond Part II',
       'Welcome to The Machine',
       'Have a Cigar',
       'Wish You Were Here',
-      'Shine On You Crazy Diamond',
+      'Shine On You Crazy Diamond Part III',
+      'Shine On You Crazy Diamond Part IV',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=YLIy2t-KAc0&list=PLfimnwaZdumgdg-BPofqK8h6cdkxIxe2H',
   },
   {
     id: 10,
@@ -178,7 +205,10 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Pigs (Three Different Ones)',
       'Sheep',
       'Pigs on the Wing (Part II)',
+      'Pigs on the Wing (Pari I & II Live)',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=fanjRToOVLc&list=PLHpyBk0pZi2TZm0vIVC8AuSgCNumRwaea&index=3',
   },
   {
     id: 11,
@@ -214,6 +244,8 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'The Trial',
       'Outside the Wall',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=iLFwTqdsuxw&list=PLyDzU3p8FP24syYfTXpGqTDHsQhlxwllS',
   },
   {
     id: 12,
@@ -225,6 +257,7 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'The Post War Dream',
       'Your Possible Pasts',
       'One of the Few',
+      'When The Tigers Broke Free',
       "The Hero's Return",
       "The Gunner's Dream",
       'Paranoid Eyes',
@@ -235,6 +268,8 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Not Now John',
       'Two Suns in the Sunset',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=Rp5_Ul-qG0w&list=PL0773596DEC67A0AF',
   },
   {
     id: 13,
@@ -248,12 +283,15 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'The Dogs of War',
       'One Slip',
       'On the Turning Away',
-      '"Yet Another Movie" / "Round and Around"',
+      'Yet Another Movie',
+      'Round and Around',
       'A New Machine (Part 1)',
       'Terminal Frost',
       'A New Machine (Part 2)',
       'Sorrow',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=hZ8QtwH7r80&list=PLpI6XGqHb_GQVh6mJKnmm3XXgj_06nJ9G',
   },
   {
     id: 14,
@@ -303,6 +341,8 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Surfacing',
       'Louder than Words',
     ],
+    youtubeUrl:
+      'https://www.youtube.com/watch?v=0dw8aFj5cwQ&list=PLrXl1WrYvNbhAQqwvKPjwVBHEWl4y3QPo',
   },
   {
     id: 16,
