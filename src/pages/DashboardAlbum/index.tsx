@@ -48,7 +48,7 @@ const DashboardAlbum: React.FC = () => {
       albumFilter === ''
         ? pinkFloydAlbunsArray
         : pinkFloydAlbunsArray.filter(album => {
-            return album.name.includes(albumFilter);
+            return album.name.toLowerCase().includes(albumFilter.toLowerCase());
           }),
     );
   }, [albumFilter]);
@@ -69,7 +69,16 @@ const DashboardAlbum: React.FC = () => {
         handleOpenDrawer={setToggleDrawer}
         toogleDrawer={toogleDrawer}
       >
-        <SearchInput type="text" placeholder="Album..." />
+        <SearchInput
+          type="text"
+          placeholder="Album..."
+          onKeyUp={e => {
+            debounce.next(e.currentTarget.value);
+          }}
+          onChange={e => {
+            debounce.next(e.currentTarget.value);
+          }}
+        />
       </HeaderBar>
       <ContainerDrawer
         anchor="left"
