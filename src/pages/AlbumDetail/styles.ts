@@ -86,9 +86,42 @@ export const AlbumPlaylist = styled.div`
       text-overflow: ellipsis;
     }
 
+    @keyframes loading-bar-morph {
+      0% {
+        transform: scaleY(1);
+      }
+      25% {
+        transform: scaleY(0.3);
+      }
+      50% {
+        transform: scaleY(0.7);
+      }
+      75% {
+        transform: scaleY(0.15);
+      }
+    }
+
     svg {
       opacity: 0;
       cursor: pointer;
+    }
+
+    svg.music-playing-svg {
+      fill: #fff;
+      opacity: 1;
+
+      rect#loading-bar-left {
+        animation: loading-bar-morph 1s linear 0.1s infinite;
+        transform-origin: center;
+      }
+      rect#loading-bar-middle {
+        animation: loading-bar-morph 1s linear 0.2s infinite;
+        transform-origin: center;
+      }
+      rect#loading-bar-right {
+        animation: loading-bar-morph 1s linear 0.4s infinite;
+        transform-origin: center;
+      }
     }
 
     &:hover {

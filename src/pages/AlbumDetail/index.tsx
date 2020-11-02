@@ -11,9 +11,9 @@ import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 
 import ReactPlayer from 'react-player/lazy';
-import {} from 'react-player';
 
 import { Slider } from '@material-ui/core';
+import { ReactComponent as PlayingMusicSvg } from '../../assets/playing-music.svg';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
 import {
@@ -33,8 +33,13 @@ import {
 } from './styles';
 
 interface YouTubePlayerProps {
+  // player playlist options
   nextVideo(): void;
   previousVideo(): void;
+  playVideoAt(index: number): void;
+  // playlistInfo
+  getPlaylist(): Array<any>;
+  getPlaylistIndex(): number;
 }
 
 interface PlayerProps extends ReactPlayer {
@@ -52,6 +57,10 @@ const AlbumDetail: React.FC = () => {
 
   const [volumePlayer, setVolumePlayer] = useState(0.5);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [
+    musicIndexPlayingInPLaylist,
+    setMusicIndexPlayingInPLaylist,
+  ] = useState(0);
 
   const history = useHistory();
 
@@ -72,12 +81,26 @@ const AlbumDetail: React.FC = () => {
   }, [albumId]);
 
   const nextSong = useCallback(() => {
+    setMusicIndexPlayingInPLaylist(oldState => {
+      return oldState + 1;
+    });
     return playerRef.current?.getInternalPlayer().nextVideo();
   }, []);
 
   const previousSong = useCallback(() => {
+    setMusicIndexPlayingInPLaylist(oldState => {
+      if (oldState > 0) {
+        return oldState - 1;
+      }
+      return oldState;
+    });
     return playerRef.current?.getInternalPlayer().previousVideo();
   }, []);
+
+  const handleSelectMusicInPlaylist = (index: number): void => {
+    setMusicIndexPlayingInPLaylist(index);
+    return playerRef.current?.getInternalPlayer().playVideoAt(index);
+  };
 
   return (
     <Container>
@@ -105,9 +128,17 @@ const AlbumDetail: React.FC = () => {
               <ul>
                 {album.playlist.map((music, index) => (
                   <li key={music}>
-                    <span>{index + 1}</span>
+                    {isPlaying && musicIndexPlayingInPLaylist === index ? (
+                      <PlayingMusicSvg className="music-playing-svg" />
+                    ) : (
+                      <span>{index + 1}</span>
+                    )}
                     <span>{music}</span>
-                    <PlayCircleOutlineRoundedIcon />
+                    <PlayCircleOutlineRoundedIcon
+                      onClick={() => {
+                        handleSelectMusicInPlaylist(index);
+                      }}
+                    />
                   </li>
                 ))}
               </ul>
@@ -123,11 +154,6 @@ const AlbumDetail: React.FC = () => {
           playing={isPlaying}
           volume={volumePlayer}
           controls
-          // config={{
-          //   youtube: {
-          //     playerVars: { autoplay: 1 },
-          //   },
-          // }}
         />
       </Content>
 
