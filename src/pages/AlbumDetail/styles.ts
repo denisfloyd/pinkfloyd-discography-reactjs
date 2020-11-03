@@ -107,7 +107,7 @@ export const AlbumPlaylist = styled.div`
     }
 
     svg.music-playing-svg {
-      fill: #fff;
+      fill: ${props => props.theme.colors.text};
       opacity: 1;
 
       rect#loading-bar-left {

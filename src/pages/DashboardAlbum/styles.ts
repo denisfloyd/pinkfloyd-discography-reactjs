@@ -78,7 +78,7 @@ export const DrawerBackButton = styled(IconButton)`
 `;
 
 export const DrawerAlbumItem = styled.li`
-  width: 250px;
+  max-width: 250px;
   background-color: ${props => props.theme.colors.background};
   box-shadow: 0 4px 8px 0
       ${props => transparentize(0.81, props.theme.colors.secundary)},
@@ -87,7 +87,6 @@ export const DrawerAlbumItem = styled.li`
   list-style: none;
   cursor: pointer;
   padding: 5px;
-  margin: 0 5px 0 0;
 
   a {
     display: flex;

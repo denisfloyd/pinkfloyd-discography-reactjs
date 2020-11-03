@@ -14,6 +14,7 @@ import ReactPlayer from 'react-player/lazy';
 
 import { Slider } from '@material-ui/core';
 import { ReactComponent as PlayingMusicSvg } from '../../assets/playing-music.svg';
+import { ReactComponent as LoadingIconSvg } from '../../assets/loading-icon.svg';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
 import {
@@ -55,7 +56,9 @@ const AlbumDetail: React.FC = () => {
     params: { albumId },
   } = useRouteMatch<AlbumDetailProps>();
 
+  const [loadingMusic, setLoadingMusic] = useState(false);
   const [volumePlayer, setVolumePlayer] = useState(0.5);
+  const [startPlaying, setStartPlaying] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [
     musicIndexPlayingInPLaylist,
@@ -81,26 +84,38 @@ const AlbumDetail: React.FC = () => {
   }, [albumId]);
 
   const nextSong = useCallback(() => {
-    setMusicIndexPlayingInPLaylist(oldState => {
-      return oldState + 1;
-    });
+    setLoadingMusic(true);
     return playerRef.current?.getInternalPlayer().nextVideo();
   }, []);
 
   const previousSong = useCallback(() => {
-    setMusicIndexPlayingInPLaylist(oldState => {
-      if (oldState > 0) {
-        return oldState - 1;
-      }
-      return oldState;
-    });
+    setLoadingMusic(true);
     return playerRef.current?.getInternalPlayer().previousVideo();
   }, []);
 
-  const handleSelectMusicInPlaylist = (index: number): void => {
-    setMusicIndexPlayingInPLaylist(index);
+  const handleSelectMusicInPlaylist = useCallback((index: number): void => {
+    setLoadingMusic(true);
     return playerRef.current?.getInternalPlayer().playVideoAt(index);
-  };
+  }, []);
+
+  const handleStartPlayer = useCallback(() => {
+    setStartPlaying(true);
+  }, []);
+
+  const handlePlayPlayer = useCallback(() => {
+    setIsPlaying(true);
+  }, []);
+
+  const handlePausePlayer = useCallback(() => {
+    setIsPlaying(false);
+  }, []);
+
+  const handleVideoBufferEnd = useCallback(() => {
+    setLoadingMusic(false);
+    return setMusicIndexPlayingInPLaylist(
+      playerRef.current?.getInternalPlayer().getPlaylistIndex() as number,
+    );
+  }, []);
 
   return (
     <Container>
@@ -128,7 +143,7 @@ const AlbumDetail: React.FC = () => {
               <ul>
                 {album.playlist.map((music, index) => (
                   <li key={music}>
-                    {isPlaying && musicIndexPlayingInPLaylist === index ? (
+                    {startPlaying && musicIndexPlayingInPLaylist === index ? (
                       <PlayingMusicSvg className="music-playing-svg" />
                     ) : (
                       <span>{index + 1}</span>
@@ -153,6 +168,11 @@ const AlbumDetail: React.FC = () => {
           url={album.youtubeUrl}
           playing={isPlaying}
           volume={volumePlayer}
+          onBufferEnd={handleVideoBufferEnd}
+          onStart={handleStartPlayer}
+          onPlay={handlePlayPlayer}
+          onPause={handlePausePlayer}
+          loop
           controls
         />
       </Content>
@@ -165,6 +185,7 @@ const AlbumDetail: React.FC = () => {
 
           <PlayerButtonPlayPause
             onClick={() => {
+              // setLoadingMusic(true);
               setIsPlaying(!isPlaying);
             }}
           >
