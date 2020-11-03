@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 import { IconButton } from '@material-ui/core';
-import { transparentize } from 'polished';
 
 interface ContainerProps {
   isScrool?: boolean;
