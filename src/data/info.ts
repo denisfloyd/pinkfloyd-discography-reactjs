@@ -205,7 +205,7 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Pigs (Three Different Ones)',
       'Sheep',
       'Pigs on the Wing (Part II)',
-      'Pigs on the Wing (Pari I & II Live)',
+      'Pigs on the Wing (Part I & II Live)',
     ],
     youtubeUrl:
       'https://www.youtube.com/watch?v=WHGNPD1v1IQ&list=PLHpyBk0pZi2TZm0vIVC8AuSgCNumRwaea',

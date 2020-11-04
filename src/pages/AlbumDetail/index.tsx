@@ -57,7 +57,6 @@ const AlbumDetail: React.FC = () => {
     params: { albumId },
   } = useRouteMatch<AlbumDetailProps>();
 
-  const [loadingMusic, setLoadingMusic] = useState(false);
   const [volumePlayer, setVolumePlayer] = useState(0.5);
   const [startPlaying, setStartPlaying] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -85,17 +84,14 @@ const AlbumDetail: React.FC = () => {
   }, [albumId]);
 
   const nextSong = useCallback(() => {
-    setLoadingMusic(true);
     return playerRef.current?.getInternalPlayer().nextVideo();
   }, []);
 
   const previousSong = useCallback(() => {
-    setLoadingMusic(true);
     return playerRef.current?.getInternalPlayer().previousVideo();
   }, []);
 
   const handleSelectMusicInPlaylist = useCallback((index: number): void => {
-    setLoadingMusic(true);
     return playerRef.current?.getInternalPlayer().playVideoAt(index);
   }, []);
 
@@ -111,9 +107,7 @@ const AlbumDetail: React.FC = () => {
     setIsPlaying(false);
   }, []);
 
-  const handleVideoBufferEnd = useCallback(() => {
-    setLoadingMusic(false);
-    console.log('onBufferEnd');
+  const handleVideoBuffer = useCallback(() => {
     return setMusicIndexPlayingInPLaylist(
       playerRef.current?.getInternalPlayer().getPlaylistIndex() as number,
     );
@@ -175,7 +169,7 @@ const AlbumDetail: React.FC = () => {
           url={album.youtubeUrl}
           playing={isPlaying}
           volume={volumePlayer}
-          onBufferEnd={handleVideoBufferEnd}
+          onBuffer={handleVideoBuffer}
           onStart={handleStartPlayer}
           onPlay={handlePlayPlayer}
           onPause={handlePausePlayer}

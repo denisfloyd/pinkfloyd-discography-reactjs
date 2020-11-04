@@ -13,6 +13,8 @@ export const Container = styled.div`
 `;
 
 export const ButtonBack = styled(Button)`
+  position: fixed;
+
   &.MuiButton-contained {
     margin: 20px;
     color: ${props => props.theme.colors.text};
@@ -36,7 +38,7 @@ export const AlbumInfo = styled.div`
   width: 1200px;
   padding: 20px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
 `;
@@ -70,6 +72,7 @@ export const AlbumCoverInfo = styled.div`
 export const AlbumPlaylist = styled.div`
   flex: 1;
   min-width: 200px;
+  overflow-y: auto;
 
   ul {
     list-style: none;
