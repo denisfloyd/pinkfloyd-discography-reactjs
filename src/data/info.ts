@@ -208,7 +208,7 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Pigs on the Wing (Pari I & II Live)',
     ],
     youtubeUrl:
-      'https://www.youtube.com/watch?v=fanjRToOVLc&list=PLHpyBk0pZi2TZm0vIVC8AuSgCNumRwaea&index=3',
+      'https://www.youtube.com/watch?v=WHGNPD1v1IQ&list=PLHpyBk0pZi2TZm0vIVC8AuSgCNumRwaea',
   },
   {
     id: 11,

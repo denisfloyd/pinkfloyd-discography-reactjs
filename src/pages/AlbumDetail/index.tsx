@@ -24,6 +24,7 @@ import {
   AlbumInfo,
   AlbumCoverInfo,
   AlbumPlaylist,
+  AlbumPlaylistRow,
   YoutubePlayer,
   PlayerButtons,
   PlayerButtonPlayPause,
@@ -112,6 +113,7 @@ const AlbumDetail: React.FC = () => {
 
   const handleVideoBufferEnd = useCallback(() => {
     setLoadingMusic(false);
+    console.log('onBufferEnd');
     return setMusicIndexPlayingInPLaylist(
       playerRef.current?.getInternalPlayer().getPlaylistIndex() as number,
     );
@@ -142,7 +144,12 @@ const AlbumDetail: React.FC = () => {
             {album.playlist && (
               <ul>
                 {album.playlist.map((music, index) => (
-                  <li key={music}>
+                  <AlbumPlaylistRow
+                    key={music}
+                    isPlaying={
+                      startPlaying && musicIndexPlayingInPLaylist === index
+                    }
+                  >
                     {startPlaying && musicIndexPlayingInPLaylist === index ? (
                       <PlayingMusicSvg className="music-playing-svg" />
                     ) : (
@@ -154,7 +161,7 @@ const AlbumDetail: React.FC = () => {
                         handleSelectMusicInPlaylist(index);
                       }}
                     />
-                  </li>
+                  </AlbumPlaylistRow>
                 ))}
               </ul>
             )}
@@ -173,7 +180,6 @@ const AlbumDetail: React.FC = () => {
           onPlay={handlePlayPlayer}
           onPause={handlePausePlayer}
           loop
-          controls
         />
       </Content>
 

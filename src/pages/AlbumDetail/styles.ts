@@ -1,8 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import ReactPlayer from 'react-player/lazy';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+
+interface AlbumPlaylistRowProps {
+  isPlaying?: boolean;
+}
 
 export const Container = styled.div`
   width: 100%;
@@ -70,68 +74,74 @@ export const AlbumPlaylist = styled.div`
   ul {
     list-style: none;
   }
+`;
 
-  li {
-    padding: 5px;
-    line-height: 26px;
+export const AlbumPlaylistRow = styled.li<AlbumPlaylistRowProps>`
+  padding: 5px;
+  line-height: 26px;
 
-    display: grid;
-    grid-template-columns: 25px 3fr auto;
+  display: grid;
+  grid-template-columns: 25px 3fr auto;
 
-    transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 
-    span {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @keyframes loading-bar-morph {
+    0% {
+      transform: scaleY(1);
     }
-
-    @keyframes loading-bar-morph {
-      0% {
-        transform: scaleY(1);
-      }
-      25% {
-        transform: scaleY(0.3);
-      }
-      50% {
-        transform: scaleY(0.7);
-      }
-      75% {
-        transform: scaleY(0.15);
-      }
+    25% {
+      transform: scaleY(0.3);
     }
-
-    svg {
-      opacity: 0;
-      cursor: pointer;
+    50% {
+      transform: scaleY(0.7);
     }
-
-    svg.music-playing-svg {
-      fill: ${props => props.theme.colors.text};
-      opacity: 1;
-
-      rect#loading-bar-left {
-        animation: loading-bar-morph 1s linear 0.1s infinite;
-        transform-origin: center;
-      }
-      rect#loading-bar-middle {
-        animation: loading-bar-morph 1s linear 0.2s infinite;
-        transform-origin: center;
-      }
-      rect#loading-bar-right {
-        animation: loading-bar-morph 1s linear 0.4s infinite;
-        transform-origin: center;
-      }
-    }
-
-    &:hover {
-      background-color: ${props => props.theme.colors.primary};
-
-      svg {
-        opacity: 1;
-      }
+    75% {
+      transform: scaleY(0.15);
     }
   }
+
+  svg {
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  svg.music-playing-svg {
+    fill: ${props => props.theme.colors.text};
+    opacity: 1;
+
+    rect#loading-bar-left {
+      animation: loading-bar-morph 1s linear 0.1s infinite;
+      transform-origin: center;
+    }
+    rect#loading-bar-middle {
+      animation: loading-bar-morph 1s linear 0.2s infinite;
+      transform-origin: center;
+    }
+    rect#loading-bar-right {
+      animation: loading-bar-morph 1s linear 0.4s infinite;
+      transform-origin: center;
+    }
+  }
+
+  &:hover {
+    background-color: ${props => props.theme.colors.primary};
+
+    svg {
+      opacity: 1;
+    }
+  }
+
+  ${props =>
+    props.isPlaying &&
+    css`
+      background-color: ${propsRoot => propsRoot.theme.colors.primary};
+    `};
 `;
 
 export const YoutubePlayer = styled(ReactPlayer)``;
