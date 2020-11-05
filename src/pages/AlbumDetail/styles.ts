@@ -163,7 +163,8 @@ export const MusicPlayingInfo = styled.div<MusicPlayingInfoProps>`
   }
 
   > svg {
-    min-width: 16px;
+    width: 16px;
+    height: 22px;
   }
 
   ${props =>

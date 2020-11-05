@@ -4,6 +4,7 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
 import PauseCircleOutlineRoundedIcon from '@material-ui/icons/PauseCircleOutlineRounded';
+import PauseOutlinedIcon from '@material-ui/icons/PauseOutlined';
 import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
 import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
 
@@ -193,7 +194,11 @@ const AlbumDetail: React.FC = () => {
 
       <Footer>
         <MusicPlayingInfo isPlaying={startPlaying}>
-          <PlayingMusicSvg className="music-playing-svg" />
+          {isPlaying ? (
+            <PlayingMusicSvg className="music-playing-svg" />
+          ) : (
+            <PauseOutlinedIcon />
+          )}
           <span>
             {album.playlist && album.playlist[musicIndexPlayingInPLaylist]}
           </span>
