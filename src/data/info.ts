@@ -60,7 +60,7 @@ export const pinkFloydAlbunsArray: Array<Album> = [
       'Crying Song',
       'Up the',
       'Green Is The Colour',
-      'Cymbaline"',
+      'Cymbaline',
       'Party Sequence',
       'Main Theme',
       'Ibiza Bar',

@@ -3,7 +3,7 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
-import PauseCircleOutlineRounded from '@material-ui/icons/PauseCircleOutlineRounded';
+import PauseCircleOutlineRoundedIcon from '@material-ui/icons/PauseCircleOutlineRounded';
 import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
 import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
 
@@ -14,7 +14,6 @@ import ReactPlayer from 'react-player/lazy';
 
 import { Slider } from '@material-ui/core';
 import { ReactComponent as PlayingMusicSvg } from '../../assets/playing-music.svg';
-import { ReactComponent as LoadingIconSvg } from '../../assets/loading-icon.svg';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
 import {
@@ -26,12 +25,13 @@ import {
   AlbumPlaylist,
   AlbumPlaylistRow,
   YoutubePlayer,
+  Footer,
+  MusicPlayingInfo,
   PlayerButtons,
   PlayerButtonPlayPause,
   PlayerButtonNavigation,
   VolumeContainer,
   PlayerButtonVolume,
-  Footer,
 } from './styles';
 
 interface YouTubePlayerProps {
@@ -70,8 +70,6 @@ const AlbumDetail: React.FC = () => {
   const [album, setAlbum] = useState({} as Album);
 
   const playerRef = useRef<PlayerProps>(null);
-
-  // TESTE
 
   useEffect(() => {
     const albumFromQueryParams = AlbumArray.filter(albumObject => {
@@ -150,11 +148,27 @@ const AlbumDetail: React.FC = () => {
                       <span>{index + 1}</span>
                     )}
                     <span>{music}</span>
-                    <PlayCircleOutlineRoundedIcon
-                      onClick={() => {
-                        handleSelectMusicInPlaylist(index);
-                      }}
-                    />
+                    {musicIndexPlayingInPLaylist === index ? (
+                      isPlaying ? (
+                        <PauseCircleOutlineRoundedIcon
+                          onClick={() => {
+                            setIsPlaying(false);
+                          }}
+                        />
+                      ) : (
+                        <PlayCircleOutlineRoundedIcon
+                          onClick={() => {
+                            setIsPlaying(true);
+                          }}
+                        />
+                      )
+                    ) : (
+                      <PlayCircleOutlineRoundedIcon
+                        onClick={() => {
+                          handleSelectMusicInPlaylist(index);
+                        }}
+                      />
+                    )}
                   </AlbumPlaylistRow>
                 ))}
               </ul>
@@ -178,6 +192,13 @@ const AlbumDetail: React.FC = () => {
       </Content>
 
       <Footer>
+        <MusicPlayingInfo isPlaying={startPlaying}>
+          <PlayingMusicSvg className="music-playing-svg" />
+          <span>
+            {album.playlist && album.playlist[musicIndexPlayingInPLaylist]}
+          </span>
+        </MusicPlayingInfo>
+
         <PlayerButtons>
           <PlayerButtonNavigation onClick={previousSong}>
             <NavigateBeforeRoundedIcon />
@@ -190,7 +211,7 @@ const AlbumDetail: React.FC = () => {
             }}
           >
             {isPlaying ? (
-              <PauseCircleOutlineRounded />
+              <PauseCircleOutlineRoundedIcon />
             ) : (
               <PlayCircleOutlineRoundedIcon />
             )}

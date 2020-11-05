@@ -36,9 +36,6 @@ export default createGlobalStyle`
     75% {
       transform: scaleY(0.15);
     }
-    9% {
-      transform: scaleY(1)
-    }
   }
 
   svg.music-playing-svg {

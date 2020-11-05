@@ -8,6 +8,10 @@ interface AlbumPlaylistRowProps {
   isPlaying?: boolean;
 }
 
+interface MusicPlayingInfoProps {
+  isPlaying?: boolean;
+}
+
 export const Container = styled.div`
   width: 100%;
 `;
@@ -94,42 +98,9 @@ export const AlbumPlaylistRow = styled.li<AlbumPlaylistRowProps>`
     text-overflow: ellipsis;
   }
 
-  @keyframes loading-bar-morph {
-    0% {
-      transform: scaleY(1);
-    }
-    25% {
-      transform: scaleY(0.3);
-    }
-    50% {
-      transform: scaleY(0.7);
-    }
-    75% {
-      transform: scaleY(0.15);
-    }
-  }
-
   svg {
     opacity: 0;
     cursor: pointer;
-  }
-
-  svg.music-playing-svg {
-    fill: ${props => props.theme.colors.text};
-    opacity: 1;
-
-    rect#loading-bar-left {
-      animation: loading-bar-morph 1s linear 0.1s infinite;
-      transform-origin: center;
-    }
-    rect#loading-bar-middle {
-      animation: loading-bar-morph 1s linear 0.2s infinite;
-      transform-origin: center;
-    }
-    rect#loading-bar-right {
-      animation: loading-bar-morph 1s linear 0.4s infinite;
-      transform-origin: center;
-    }
   }
 
   &:hover {
@@ -137,6 +108,10 @@ export const AlbumPlaylistRow = styled.li<AlbumPlaylistRowProps>`
 
     svg {
       opacity: 1;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 
@@ -163,7 +138,39 @@ export const Footer = styled.footer`
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+
+  /* > div {
+    &:nth-child(1),
+    :nth-child(3) {
+      margin: 0 20px;
+    }
+  } */
+`;
+
+export const MusicPlayingInfo = styled.div<MusicPlayingInfoProps>`
+  display: flex;
+  opacity: 0;
+  width: 250px;
+  margin-right: 130px;
+
+  > span {
+    margin-left: 10px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  > svg {
+    min-width: 16px;
+  }
+
+  ${props =>
+    props.isPlaying &&
+    css`
+      opacity: 1;
+    `}
 `;
 
 export const PlayerButtons = styled.div`
@@ -202,7 +209,7 @@ export const VolumeContainer = styled.div`
   justify-content: center;
 
   min-width: 200px;
-  margin-left: 500px;
+  /* margin-left: 500px; */
 
   .MuiSlider-colorPrimary {
     color: ${props => props.theme.colors.secundary};
