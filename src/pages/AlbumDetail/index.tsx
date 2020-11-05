@@ -15,6 +15,7 @@ import ReactPlayer from 'react-player/lazy';
 
 import { Slider } from '@material-ui/core';
 import { ReactComponent as PlayingMusicSvg } from '../../assets/playing-music.svg';
+import { ReactComponent as LoadingIconSvg } from '../../assets/loading-icon.svg';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
 import {
@@ -28,6 +29,7 @@ import {
   YoutubePlayer,
   Footer,
   MusicPlayingInfo,
+  MusicPlayingInfoText,
   PlayerButtons,
   PlayerButtonPlayPause,
   PlayerButtonNavigation,
@@ -58,6 +60,7 @@ const AlbumDetail: React.FC = () => {
     params: { albumId },
   } = useRouteMatch<AlbumDetailProps>();
 
+  const [isLoadingMusic, setIsLoadingMusic] = useState(false);
   const [volumePlayer, setVolumePlayer] = useState(0.5);
   const [startPlaying, setStartPlaying] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -143,11 +146,7 @@ const AlbumDetail: React.FC = () => {
                       startPlaying && musicIndexPlayingInPLaylist === index
                     }
                   >
-                    {startPlaying && musicIndexPlayingInPLaylist === index ? (
-                      <PlayingMusicSvg className="music-playing-svg" />
-                    ) : (
-                      <span>{index + 1}</span>
-                    )}
+                    <span>{index + 1}</span>
                     <span>{music}</span>
                     {musicIndexPlayingInPLaylist === index ? (
                       isPlaying ? (
@@ -184,7 +183,13 @@ const AlbumDetail: React.FC = () => {
           url={album.youtubeUrl}
           playing={isPlaying}
           volume={volumePlayer}
-          onBuffer={handleVideoBuffer}
+          onBuffer={() => {
+            setIsLoadingMusic(true);
+            handleVideoBuffer();
+          }}
+          onBufferEnd={() => {
+            setIsLoadingMusic(false);
+          }}
           onStart={handleStartPlayer}
           onPlay={handlePlayPlayer}
           onPause={handlePausePlayer}
@@ -193,15 +198,18 @@ const AlbumDetail: React.FC = () => {
       </Content>
 
       <Footer>
-        <MusicPlayingInfo isPlaying={startPlaying}>
-          {isPlaying ? (
-            <PlayingMusicSvg className="music-playing-svg" />
-          ) : (
-            <PauseOutlinedIcon />
-          )}
-          <span>
-            {album.playlist && album.playlist[musicIndexPlayingInPLaylist]}
-          </span>
+        <MusicPlayingInfo>
+          {isLoadingMusic && <LoadingIconSvg className="loading-svg" />}
+          <MusicPlayingInfoText isPlaying={startPlaying && !isLoadingMusic}>
+            {isPlaying ? (
+              <PlayingMusicSvg className="music-playing-svg" />
+            ) : (
+              <PauseOutlinedIcon />
+            )}
+            <span>
+              {album.playlist && album.playlist[musicIndexPlayingInPLaylist]}
+            </span>
+          </MusicPlayingInfoText>
         </MusicPlayingInfo>
 
         <PlayerButtons>
@@ -211,7 +219,6 @@ const AlbumDetail: React.FC = () => {
 
           <PlayerButtonPlayPause
             onClick={() => {
-              // setLoadingMusic(true);
               setIsPlaying(!isPlaying);
             }}
           >

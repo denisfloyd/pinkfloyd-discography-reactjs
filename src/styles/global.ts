@@ -38,6 +38,15 @@ export default createGlobalStyle`
     }
   }
 
+  @keyframes loading-spinner {
+    from {
+      transform: rotate(0deg)
+    }
+    to {
+      transform: rotate(360deg)
+    }
+  }
+
   svg.music-playing-svg {
     fill: ${props => props.theme.colors.text};
     opacity: 1;
@@ -54,5 +63,14 @@ export default createGlobalStyle`
       animation: loading-bar-morph 1s linear 0.4s infinite;
       transform-origin: center;
     }
+  }
+
+  svg.loading-svg {
+    g {
+      > path:nth-child(2) {
+        fill: ${props => props.theme.colors.text};
+      }
+    }
+    animation: loading-spinner 1s linear infinite
   }
 `;

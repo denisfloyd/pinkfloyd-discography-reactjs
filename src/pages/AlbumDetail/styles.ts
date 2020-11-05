@@ -148,11 +148,19 @@ export const Footer = styled.footer`
   } */
 `;
 
-export const MusicPlayingInfo = styled.div<MusicPlayingInfoProps>`
+export const MusicPlayingInfo = styled.div`
+  display: flex;
+  align-items: center;
+  /* width: 250px; */
+  margin-right: 130px;
+`;
+
+export const MusicPlayingInfoText = styled.div<MusicPlayingInfoProps>`
   display: flex;
   opacity: 0;
   width: 250px;
-  margin-right: 130px;
+  /* width: 250px;
+  margin-right: 130px; */
 
   > span {
     margin-left: 10px;
