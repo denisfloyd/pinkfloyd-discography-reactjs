@@ -1,35 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import HeaderBar from '../../components/Header';
 import AlbumCard from '../../components/AlbumCard';
 
 import { pinkFloydAlbunsArray } from '../../data/info';
 
-import {
-  Container,
-  SearchInput,
-  ContainerDrawer,
-  DrawerHeader,
-  DrawerHeaderContainer,
-  DrawerBackButton,
-  DrawerAlbumItem,
-  AlbumsView,
-} from './styles';
+import { Container, SearchInput, AlbumsView } from './styles';
 
 const DashboardAlbum: React.FC = () => {
-  const [toogleDrawer, setToggleDrawer] = useState(false);
-
   // Album variables
   const [albumList, setAlbumList] = useState(pinkFloydAlbunsArray);
   const [albumFilter, setAlbumFilter] = useState('');
-
-  const [userScrollDown, setUserScrollDown] = useState(false);
 
   const debounce: Subject<string> = new Subject<string>();
 
@@ -53,63 +36,18 @@ const DashboardAlbum: React.FC = () => {
     );
   }, [albumFilter]);
 
-  const handleScrollScreen = useCallback(() => {
-    if (window.scrollY > 60) {
-      return setUserScrollDown(true);
-    }
-    return setUserScrollDown(false);
-  }, []);
-
-  window.addEventListener('scroll', handleScrollScreen);
-
   return (
     <Container>
-      <HeaderBar
-        userScroolDown={userScrollDown}
-        handleOpenDrawer={setToggleDrawer}
-        toogleDrawer={toogleDrawer}
-      >
-        <SearchInput
-          type="text"
-          placeholder="Album..."
-          onKeyUp={e => {
-            debounce.next(e.currentTarget.value);
-          }}
-          onChange={e => {
-            debounce.next(e.currentTarget.value);
-          }}
-        />
-      </HeaderBar>
-      <ContainerDrawer
-        anchor="left"
-        open={toogleDrawer}
-        onClose={() => {
-          setToggleDrawer(false);
+      <SearchInput
+        type="text"
+        placeholder="Album..."
+        onKeyUp={e => {
+          debounce.next(e.currentTarget.value);
         }}
-      >
-        <DrawerHeader>
-          <DrawerHeaderContainer>
-            <DrawerBackButton
-              onClick={() => {
-                setToggleDrawer(!toogleDrawer);
-              }}
-            >
-              <ArrowBackIosIcon />
-            </DrawerBackButton>
-          </DrawerHeaderContainer>
-        </DrawerHeader>
-
-        <ul>
-          {pinkFloydAlbunsArray.map(album => (
-            <DrawerAlbumItem key={album.id}>
-              <Link to={`/album/${album.id}`}>
-                <img src={album.image} alt={album.name} />
-                <p>{album.name}</p>
-              </Link>
-            </DrawerAlbumItem>
-          ))}
-        </ul>
-      </ContainerDrawer>
+        onChange={e => {
+          debounce.next(e.currentTarget.value);
+        }}
+      />
 
       <AlbumsView>
         {/* <Album>

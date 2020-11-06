@@ -45,8 +45,8 @@ export const Content = styled.div<ContentProps>`
 `;
 
 export const AlbumInfo = styled.div`
-  background-color: ${props => props.theme.colors.primaryTransparent};
-  color: #fff;
+  background-color: ${props => transparentize(0.1, props.theme.colors.primary)};
+  color: ${props => props.theme.colors.text};
   padding: 1rem;
   position: absolute;
   max-height: 100%;

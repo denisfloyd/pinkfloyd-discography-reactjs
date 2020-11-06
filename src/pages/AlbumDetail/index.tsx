@@ -18,6 +18,8 @@ import { ReactComponent as PlayingMusicSvg } from '../../assets/playing-music.sv
 import { ReactComponent as LoadingIconSvg } from '../../assets/loading-icon.svg';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
+import HeaderBar from '../../components/Header';
+
 import {
   Container,
   ButtonBack,
@@ -95,6 +97,10 @@ const AlbumDetail: React.FC = () => {
 
   const handleSelectMusicInPlaylist = useCallback((index: number): void => {
     return playerRef.current?.getInternalPlayer().playVideoAt(index);
+  }, []);
+
+  const handleErrorPlayer = useCallback(() => {
+    //
   }, []);
 
   const handleStartPlayer = useCallback(() => {
@@ -190,6 +196,7 @@ const AlbumDetail: React.FC = () => {
           onBufferEnd={() => {
             setIsLoadingMusic(false);
           }}
+          onError={handleErrorPlayer}
           onStart={handleStartPlayer}
           onPlay={handlePlayPlayer}
           onPause={handlePausePlayer}

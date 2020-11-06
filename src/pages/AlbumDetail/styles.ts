@@ -36,11 +36,13 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+
+  margin-bottom: 90px;
 `;
 
 export const AlbumInfo = styled.div`
   width: 1200px;
-  padding: 20px;
+  padding: 45px 20px 20px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;

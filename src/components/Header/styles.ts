@@ -40,9 +40,13 @@ export const Content = styled.div<ContentProps>`
     `};
 `;
 
-export const MenuButton = styled(IconButton)``;
+export const MenuButton = styled(IconButton)`
+  &.MuiIconButton-root {
+    color: ${props => props.theme.colors.text};
+  }
+`;
 
-export const TextTitle = styled.div`
+export const TextTitle = styled.h1`
   font-weight: bold;
   font-size: 20px;
 `;

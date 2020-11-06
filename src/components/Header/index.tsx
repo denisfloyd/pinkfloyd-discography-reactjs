@@ -22,7 +22,7 @@ const HeaderBar: React.FC<HeaderProps> = ({
           handleOpenDrawer(!toogleDrawer);
         }}
       >
-        <MenuIcon fontSize="large" style={{ color: '#fff' }} />
+        <MenuIcon fontSize="large" />
       </MenuButton>
 
       <Content drawerOpen={toogleDrawer}>
