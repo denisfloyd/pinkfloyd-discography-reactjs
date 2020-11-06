@@ -49,4 +49,6 @@ export const MenuButton = styled(IconButton)`
 export const TextTitle = styled.h1`
   font-weight: bold;
   font-size: 20px;
+
+  cursor: pointer;
 `;

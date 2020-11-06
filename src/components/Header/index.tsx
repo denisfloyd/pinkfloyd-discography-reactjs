@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { useHistory } from 'react-router-dom';
 import { Container, Content, MenuButton, TextTitle } from './styles';
 
 interface HeaderProps {
@@ -15,6 +16,8 @@ const HeaderBar: React.FC<HeaderProps> = ({
   toogleDrawer,
   children,
 }) => {
+  const history = useHistory();
+
   return (
     <Container isScrool={userScroolDown} drawerOpen={toogleDrawer}>
       <MenuButton
@@ -26,7 +29,13 @@ const HeaderBar: React.FC<HeaderProps> = ({
       </MenuButton>
 
       <Content drawerOpen={toogleDrawer}>
-        <TextTitle>PINK FLOYD DISCOGRAPHY</TextTitle>
+        <TextTitle
+          onClick={() => {
+            history.push('');
+          }}
+        >
+          PINK FLOYD DISCOGRAPHY
+        </TextTitle>
       </Content>
 
       {children}

@@ -349,6 +349,23 @@ export const pinkFloydAlbunsArray: Array<Album> = [
     name: 'Delicate Sound of Thunder',
     image:
       'https://upload.wikimedia.org/wikipedia/pt/c/c4/Pink_Floyd_-_Delicate_Sound_of_Thunder.jpg',
+    playlist: [
+      'Shine On You Crazy Diamond',
+      'Learning to Fly',
+      'Yet Another Movie',
+      'Round and Around',
+      'Sorrow',
+      'The Dogs of War',
+      'On the Turning Away',
+      'One of These Days',
+      'Time',
+      'Wish You Were Here',
+      'Us and Them',
+      'Money',
+      'Another Brick in the Wall (Part 2)',
+      'Comfortably Numb',
+      'Run Like Hell',
+    ],
     year: 1988,
   },
   {

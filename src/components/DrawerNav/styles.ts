@@ -34,17 +34,22 @@ export const Container = styled(Drawer)`
 
 export const Header = styled.div`
   height: 100px;
+  width: 100%;
   background: ${props => props.theme.colors.primary};
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: space-between; */
 `;
 
 export const HeaderContainer = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
+  padding: 0 10px;
 `;
 
-export const BackButton = styled(IconButton)`
+export const IconButtonDrawer = styled(IconButton)`
   &.MuiIconButton-root {
     color: ${props => props.theme.colors.text};
   }

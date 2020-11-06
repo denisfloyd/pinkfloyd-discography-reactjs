@@ -42,7 +42,7 @@ export const Content = styled.div`
 
 export const AlbumInfo = styled.div`
   width: 1200px;
-  padding: 45px 20px 20px;
+  padding: 120px 20px 20px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -135,7 +135,6 @@ export const Footer = styled.footer`
   left: 0;
   bottom: 0;
   width: 100%;
-  color: white;
   text-align: center;
 
   display: flex;

@@ -123,17 +123,6 @@ const AlbumDetail: React.FC = () => {
 
   return (
     <Container>
-      <ButtonBack
-        variant="contained"
-        size="medium"
-        startIcon={<KeyboardBackspaceRoundedIcon />}
-        onClick={() => {
-          history.push('');
-        }}
-      >
-        Voltar
-      </ButtonBack>
-
       <Content>
         <AlbumInfo>
           <AlbumCoverInfo>

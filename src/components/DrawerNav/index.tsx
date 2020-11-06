@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import HomeIcon from '@material-ui/icons/Home';
 
 import { pinkFloydAlbunsArray } from '../../data/info';
 
@@ -9,7 +10,7 @@ import {
   Container,
   Header,
   HeaderContainer,
-  BackButton,
+  IconButtonDrawer,
   AlbumItem,
 } from './styles';
 
@@ -22,6 +23,8 @@ const DrawerNav: React.FC<DrawerNavProps> = ({
   toogleDrawer,
   setToggleDrawer,
 }) => {
+  const history = useHistory();
+
   return (
     <Container
       anchor="left"
@@ -32,13 +35,22 @@ const DrawerNav: React.FC<DrawerNavProps> = ({
     >
       <Header>
         <HeaderContainer>
-          <BackButton
+          <IconButtonDrawer
+            onClick={() => {
+              history.push('');
+              setToggleDrawer(!toogleDrawer);
+            }}
+          >
+            <HomeIcon />
+          </IconButtonDrawer>
+
+          <IconButtonDrawer
             onClick={() => {
               setToggleDrawer(!toogleDrawer);
             }}
           >
             <ArrowBackIosIcon />
-          </BackButton>
+          </IconButtonDrawer>
         </HeaderContainer>
       </Header>
 
