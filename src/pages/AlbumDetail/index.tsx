@@ -13,6 +13,7 @@ import VolumeUp from '@material-ui/icons/VolumeUp';
 import ReactPlayer from 'react-player/lazy';
 
 import { Slider } from '@material-ui/core';
+import { SlowMotionVideoRounded } from '@material-ui/icons';
 import { ReactComponent as PlayingMusicSvg } from '../../assets/playing-music.svg';
 import { ReactComponent as LoadingIconSvg } from '../../assets/loading-icon.svg';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
@@ -53,6 +54,13 @@ interface AlbumDetailProps {
   albumId: string;
 }
 
+interface Progress {
+  played: number;
+  playedSeconds: number;
+  loaded: number;
+  loadedSeconds: number;
+}
+
 const AlbumDetail: React.FC = () => {
   const {
     params: { albumId },
@@ -66,6 +74,8 @@ const AlbumDetail: React.FC = () => {
     musicIndexPlayingInPLaylist,
     setMusicIndexPlayingInPLaylist,
   ] = useState(0);
+  const [progress, setProgress] = useState<Progress>({} as Progress);
+  const [duration, setDuration] = useState(0);
 
   const [album, setAlbum] = useState({} as Album);
 
@@ -113,6 +123,15 @@ const AlbumDetail: React.FC = () => {
     return setMusicIndexPlayingInPLaylist(
       playerRef.current?.getInternalPlayer().getPlaylistIndex() as number,
     );
+  }, []);
+
+  const handleProgress = useCallback((newProgress: Progress) => {
+    console.log(newProgress);
+    setProgress(newProgress);
+  }, []);
+
+  const handleDuration = useCallback(newDuration => {
+    setDuration(newDuration);
   }, []);
 
   return (
@@ -183,6 +202,8 @@ const AlbumDetail: React.FC = () => {
           onStart={handleStartPlayer}
           onPlay={handlePlayPlayer}
           onPause={handlePausePlayer}
+          onProgress={handleProgress}
+          onDuration={handleDuration}
           loop
         />
       </Content>
@@ -223,6 +244,17 @@ const AlbumDetail: React.FC = () => {
             <NavigateNextRoundedIcon />
           </PlayerButtonNavigation>
         </PlayerButtons>
+
+        <Slider
+          max={0.999999}
+          min={0}
+          step={0.000001}
+          value={progress.played ? progress.played : 0}
+          onChange={(event: any, newValue: number | number[]) => {
+            return playerRef.current?.seekTo(newValue as number);
+          }}
+          aria-labelledby="continuous-slider"
+        />
 
         <VolumeContainer>
           <PlayerButtonVolume

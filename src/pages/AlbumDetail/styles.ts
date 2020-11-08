@@ -131,6 +131,32 @@ export const Footer = styled.footer`
       margin: 0 20px;
     }
   } */
+
+  > span {
+    width: 400px;
+    position: absolute;
+    bottom: 0;
+
+    color: ${props => props.theme.colors.secundary};
+
+    .MuiSlider-rail {
+      height: 7px;
+    }
+
+    .MuiSlider-track {
+      height: 7px;
+    }
+
+    .MuiSlider-thumb {
+      width: 15px;
+      height: 15px;
+      /* transition: scale 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.02);
+      } */
+    }
+  }
 `;
 
 export const MusicPlayingInfo = styled.div`
@@ -175,6 +201,7 @@ export const PlayerButtons = styled.div`
   position: absolute;
   left: 0;
   right: 0;
+  bottom: 15px;
 `;
 
 export const PlayerButtonPlayPause = styled(IconButton)`

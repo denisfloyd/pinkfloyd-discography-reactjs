@@ -8,7 +8,7 @@ interface ThemeContextData {
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
 
 const ThemeProvider: React.FC = ({ children }) => {
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
 
   return (
     <ThemeContext.Provider value={{ isDarkTheme, setIsDarkTheme }}>
