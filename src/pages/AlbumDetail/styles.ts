@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 import ReactPlayer from 'react-player/lazy';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 
 interface AlbumPlaylistRowProps {
@@ -14,21 +13,6 @@ interface MusicPlayingInfoProps {
 
 export const Container = styled.div`
   width: 100%;
-`;
-
-export const ButtonBack = styled(Button)`
-  position: fixed;
-
-  &.MuiButton-contained {
-    margin: 20px;
-    color: ${props => props.theme.colors.text};
-    background-color: transparent;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: ${props => props.theme.colors.primary};
-    }
-  }
 `;
 
 export const Content = styled.div`

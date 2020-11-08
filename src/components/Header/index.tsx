@@ -1,8 +1,12 @@
 import React from 'react';
-import MenuIcon from '@material-ui/icons/Menu';
-
 import { useHistory } from 'react-router-dom';
-import { Container, Content, MenuButton, TextTitle } from './styles';
+
+import MenuIcon from '@material-ui/icons/Menu';
+import BrightnessDarkIcon from '@material-ui/icons/Brightness4';
+import BrightnessLightIcon from '@material-ui/icons/BrightnessLow';
+import { useTheme } from '../../hooks/theme';
+
+import { Container, ContentTitle, MenuButton, TextTitle } from './styles';
 
 interface HeaderProps {
   userScroolDown: boolean;
@@ -18,17 +22,19 @@ const HeaderBar: React.FC<HeaderProps> = ({
 }) => {
   const history = useHistory();
 
+  const { isDarkTheme, setIsDarkTheme } = useTheme();
+
   return (
     <Container isScrool={userScroolDown} drawerOpen={toogleDrawer}>
-      <MenuButton
-        onClick={() => {
-          handleOpenDrawer(!toogleDrawer);
-        }}
-      >
-        <MenuIcon fontSize="large" />
-      </MenuButton>
+      <ContentTitle drawerOpen={toogleDrawer}>
+        <MenuButton
+          onClick={() => {
+            handleOpenDrawer(!toogleDrawer);
+          }}
+        >
+          <MenuIcon fontSize="large" />
+        </MenuButton>
 
-      <Content drawerOpen={toogleDrawer}>
         <TextTitle
           onClick={() => {
             history.push('');
@@ -36,7 +42,19 @@ const HeaderBar: React.FC<HeaderProps> = ({
         >
           PINK FLOYD DISCOGRAPHY
         </TextTitle>
-      </Content>
+      </ContentTitle>
+
+      <MenuButton
+        onClick={() => {
+          setIsDarkTheme(!isDarkTheme);
+        }}
+      >
+        {isDarkTheme ? (
+          <BrightnessDarkIcon fontSize="large" />
+        ) : (
+          <BrightnessLightIcon fontSize="large" />
+        )}
+      </MenuButton>
 
       {children}
     </Container>

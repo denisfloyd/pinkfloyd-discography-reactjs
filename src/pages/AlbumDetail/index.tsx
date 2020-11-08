@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useRouteMatch, useHistory } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 
-import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
 import PauseCircleOutlineRoundedIcon from '@material-ui/icons/PauseCircleOutlineRounded';
 import PauseOutlinedIcon from '@material-ui/icons/PauseOutlined';
@@ -18,11 +17,8 @@ import { ReactComponent as PlayingMusicSvg } from '../../assets/playing-music.sv
 import { ReactComponent as LoadingIconSvg } from '../../assets/loading-icon.svg';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
 
-import HeaderBar from '../../components/Header';
-
 import {
   Container,
-  ButtonBack,
   Content,
   AlbumInfo,
   AlbumCoverInfo,
@@ -70,8 +66,6 @@ const AlbumDetail: React.FC = () => {
     musicIndexPlayingInPLaylist,
     setMusicIndexPlayingInPLaylist,
   ] = useState(0);
-
-  const history = useHistory();
 
   const [album, setAlbum] = useState({} as Album);
 

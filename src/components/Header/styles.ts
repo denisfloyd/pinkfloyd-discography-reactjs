@@ -7,7 +7,7 @@ interface ContainerProps {
   drawerOpen?: boolean;
 }
 
-interface ContentProps {
+interface ContentTitleProps {
   drawerOpen?: boolean;
 }
 
@@ -15,12 +15,10 @@ export const Container = styled.div<ContainerProps>`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 35px 20px;
   position: fixed;
   z-index: 1;
-
-  display: flex;
 
   transition: background-color 0.3s ease-in-out, padding 0.4s ease;
 
@@ -32,11 +30,14 @@ export const Container = styled.div<ContainerProps>`
     `};
 `;
 
-export const Content = styled.div<ContentProps>`
+export const ContentTitle = styled.div<ContentTitleProps>`
+  display: flex;
+  align-items: center;
+
   ${props =>
     props.drawerOpen &&
     css`
-      margin-left: calc(255px - 32px - 35px);
+      margin-left: calc(255px - 72px);
     `};
 `;
 
