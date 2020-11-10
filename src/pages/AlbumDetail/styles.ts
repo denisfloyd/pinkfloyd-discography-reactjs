@@ -124,39 +124,6 @@ export const Footer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: space-around;
-
-  /* > div {
-    &:nth-child(1),
-    :nth-child(3) {
-      margin: 0 20px;
-    }
-  } */
-
-  > span {
-    width: 400px;
-    position: absolute;
-    bottom: 0;
-
-    color: ${props => props.theme.colors.secundary};
-
-    .MuiSlider-rail {
-      height: 7px;
-    }
-
-    .MuiSlider-track {
-      height: 7px;
-    }
-
-    .MuiSlider-thumb {
-      width: 15px;
-      height: 15px;
-      /* transition: scale 0.2s ease-in-out;
-
-      &:hover {
-        transform: scale(1.02);
-      } */
-    }
-  }
 `;
 
 export const MusicPlayingInfo = styled.div`
@@ -170,6 +137,7 @@ export const MusicPlayingInfoText = styled.div<MusicPlayingInfoProps>`
   display: flex;
   opacity: 0;
   width: 250px;
+  margin-left: 5px;
   /* width: 250px;
   margin-right: 130px; */
 
@@ -224,17 +192,60 @@ export const PlayerButtonNavigation = styled(IconButton)`
   }
 `;
 
+export const PlayerSeekBarContainer = styled.div`
+  position: absolute;
+  bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: ${props => props.theme.colors.secundary};
+
+  > span {
+    min-width: 400px;
+    margin-bottom: 5px;
+  }
+
+  .MuiSlider-root {
+    color: ${props => props.theme.colors.secundary};
+  }
+
+  .MuiSlider-rail {
+    height: 7px;
+  }
+
+  .MuiSlider-track {
+    height: 7px;
+  }
+
+  .MuiSlider-thumb {
+    width: 15px;
+    height: 15px;
+    bottom: 4px;
+
+    transition: scale 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+`;
+
 export const VolumeContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 
   min-width: 200px;
-  /* margin-left: 500px; */
 
   .MuiSlider-colorPrimary {
     color: ${props => props.theme.colors.secundary};
   }
+`;
+
+export const TimeText = styled.p`
+  width: 60px;
+  /* margin: 0 8px; */
 `;
 
 export const PlayerButtonVolume = styled(IconButton)`

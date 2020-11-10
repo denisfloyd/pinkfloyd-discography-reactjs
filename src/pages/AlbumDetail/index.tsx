@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useRouteMatch } from 'react-router-dom';
 
 import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
@@ -13,10 +19,11 @@ import VolumeUp from '@material-ui/icons/VolumeUp';
 import ReactPlayer from 'react-player/lazy';
 
 import { Slider } from '@material-ui/core';
-import { SlowMotionVideoRounded } from '@material-ui/icons';
 import { ReactComponent as PlayingMusicSvg } from '../../assets/playing-music.svg';
 import { ReactComponent as LoadingIconSvg } from '../../assets/loading-icon.svg';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
+
+import { format } from '../../utils/formatSecondsInMinutes';
 
 import {
   Container,
@@ -32,6 +39,8 @@ import {
   PlayerButtons,
   PlayerButtonPlayPause,
   PlayerButtonNavigation,
+  PlayerSeekBarContainer,
+  TimeText,
   VolumeContainer,
   PlayerButtonVolume,
 } from './styles';
@@ -44,6 +53,8 @@ interface YouTubePlayerProps {
   // playlistInfo
   getPlaylist(): Array<any>;
   getPlaylistIndex(): number;
+
+  getDuration(): number;
 }
 
 interface PlayerProps extends ReactPlayer {
@@ -74,7 +85,13 @@ const AlbumDetail: React.FC = () => {
     musicIndexPlayingInPLaylist,
     setMusicIndexPlayingInPLaylist,
   ] = useState(0);
-  const [progress, setProgress] = useState<Progress>({} as Progress);
+  const [isSeeking, setIsSeeking] = useState(false);
+  const [progress, setProgress] = useState<Progress>({
+    loaded: 0,
+    loadedSeconds: 0,
+    played: 0,
+    playedSeconds: 0,
+  });
   const [duration, setDuration] = useState(0);
 
   const [album, setAlbum] = useState({} as Album);
@@ -120,19 +137,46 @@ const AlbumDetail: React.FC = () => {
   }, []);
 
   const handleVideoBuffer = useCallback(() => {
-    return setMusicIndexPlayingInPLaylist(
+    setIsLoadingMusic(true);
+    setMusicIndexPlayingInPLaylist(
       playerRef.current?.getInternalPlayer().getPlaylistIndex() as number,
     );
   }, []);
 
-  const handleProgress = useCallback((newProgress: Progress) => {
-    console.log(newProgress);
-    setProgress(newProgress);
+  const handleVideoBufferEnd = useCallback(() => {
+    setIsLoadingMusic(false);
+    setDuration(
+      playerRef.current
+        ? playerRef.current.getInternalPlayer().getDuration()
+        : 0,
+    );
   }, []);
 
-  const handleDuration = useCallback(newDuration => {
-    setDuration(newDuration);
+  const handleOnMouseDownSeekBar = useCallback(() => {
+    setIsSeeking(true);
   }, []);
+
+  const handleOnMouseUpSeekBar = useCallback((newValue: number) => {
+    setIsSeeking(false);
+    return playerRef.current?.seekTo(newValue);
+  }, []);
+
+  const handleProgress = useCallback(
+    (newProgress: Progress) => {
+      if (!isSeeking) {
+        setProgress(newProgress);
+      }
+    },
+    [isSeeking],
+  );
+
+  const musicTimeElapse = useMemo(() => {
+    return format(duration * progress.played);
+  }, [duration, progress]);
+
+  const musicDuration = useMemo(() => {
+    return format(duration);
+  }, [duration]);
 
   return (
     <Container>
@@ -191,19 +235,13 @@ const AlbumDetail: React.FC = () => {
           url={album.youtubeUrl}
           playing={isPlaying}
           volume={volumePlayer}
-          onBuffer={() => {
-            setIsLoadingMusic(true);
-            handleVideoBuffer();
-          }}
-          onBufferEnd={() => {
-            setIsLoadingMusic(false);
-          }}
+          onBuffer={handleVideoBuffer}
+          onBufferEnd={handleVideoBufferEnd}
           onError={handleErrorPlayer}
           onStart={handleStartPlayer}
           onPlay={handlePlayPlayer}
           onPause={handlePausePlayer}
           onProgress={handleProgress}
-          onDuration={handleDuration}
           loop
         />
       </Content>
@@ -211,8 +249,8 @@ const AlbumDetail: React.FC = () => {
       <Footer>
         <MusicPlayingInfo>
           {isLoadingMusic && <LoadingIconSvg className="loading-svg" />}
-          <MusicPlayingInfoText isPlaying={startPlaying && !isLoadingMusic}>
-            {isPlaying ? (
+          <MusicPlayingInfoText isPlaying={startPlaying}>
+            {isPlaying || isLoadingMusic ? (
               <PlayingMusicSvg className="music-playing-svg" />
             ) : (
               <PauseOutlinedIcon />
@@ -245,16 +283,26 @@ const AlbumDetail: React.FC = () => {
           </PlayerButtonNavigation>
         </PlayerButtons>
 
-        <Slider
-          max={0.999999}
-          min={0}
-          step={0.000001}
-          value={progress.played ? progress.played : 0}
-          onChange={(event: any, newValue: number | number[]) => {
-            return playerRef.current?.seekTo(newValue as number);
-          }}
-          aria-labelledby="continuous-slider"
-        />
+        <PlayerSeekBarContainer>
+          <TimeText>{musicTimeElapse}</TimeText>
+          <Slider
+            max={0.999999}
+            min={0}
+            step={0.000001}
+            value={progress.played}
+            // valueLabelDisplay="auto"
+            // valueLabelFormat={(value: number) => `${format(value)}`}
+            onChange={(event: object, newValue: number | number[]) => {
+              setProgress({ ...progress, played: newValue as number });
+            }}
+            aria-labelledby="continuous-slider"
+            onMouseDown={handleOnMouseDownSeekBar}
+            onChangeCommitted={(event: object, value: number | number[]) => {
+              handleOnMouseUpSeekBar(value as number);
+            }}
+          />
+          <TimeText>{musicDuration}</TimeText>
+        </PlayerSeekBarContainer>
 
         <VolumeContainer>
           <PlayerButtonVolume
