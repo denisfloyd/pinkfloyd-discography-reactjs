@@ -1,9 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useRouteMatch, useHistory } from 'react-router-dom';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { useRouteMatch } from 'react-router-dom';
 
-import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
-import PauseCircleOutlineRounded from '@material-ui/icons/PauseCircleOutlineRounded';
+import PauseCircleOutlineRoundedIcon from '@material-ui/icons/PauseCircleOutlineRounded';
+import PauseOutlinedIcon from '@material-ui/icons/PauseOutlined';
 import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
 import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
 
@@ -11,30 +17,44 @@ import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 
 import ReactPlayer from 'react-player/lazy';
-import {} from 'react-player';
 
 import { Slider } from '@material-ui/core';
+import { ReactComponent as PlayingMusicSvg } from '../../assets/playing-music.svg';
+import { ReactComponent as LoadingIconSvg } from '../../assets/loading-icon.svg';
 import { Album, pinkFloydAlbunsArray as AlbumArray } from '../../data/info';
+
+import { format } from '../../utils/formatSecondsInMinutes';
 
 import {
   Container,
-  ButtonBack,
   Content,
   AlbumInfo,
   AlbumCoverInfo,
   AlbumPlaylist,
+  AlbumPlaylistRow,
   YoutubePlayer,
+  Footer,
+  MusicPlayingInfo,
+  MusicPlayingInfoText,
   PlayerButtons,
   PlayerButtonPlayPause,
   PlayerButtonNavigation,
+  PlayerSeekBarContainer,
+  TimeText,
   VolumeContainer,
   PlayerButtonVolume,
-  Footer,
 } from './styles';
 
 interface YouTubePlayerProps {
+  // player playlist options
   nextVideo(): void;
   previousVideo(): void;
+  playVideoAt(index: number): void;
+  // playlistInfo
+  getPlaylist(): Array<any>;
+  getPlaylistIndex(): number;
+
+  getDuration(): number;
 }
 
 interface PlayerProps extends ReactPlayer {
@@ -45,21 +65,39 @@ interface AlbumDetailProps {
   albumId: string;
 }
 
+interface Progress {
+  played: number;
+  playedSeconds: number;
+  loaded: number;
+  loadedSeconds: number;
+}
+
 const AlbumDetail: React.FC = () => {
   const {
     params: { albumId },
   } = useRouteMatch<AlbumDetailProps>();
 
+  const [isLoadingMusic, setIsLoadingMusic] = useState(false);
   const [volumePlayer, setVolumePlayer] = useState(0.5);
+  const [startPlaying, setStartPlaying] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const history = useHistory();
+  const [
+    musicIndexPlayingInPLaylist,
+    setMusicIndexPlayingInPLaylist,
+  ] = useState(0);
+  const [isSeeking, setIsSeeking] = useState(false);
+  const [progress, setProgress] = useState<Progress>({
+    loaded: 0,
+    loadedSeconds: 0,
+    played: 0,
+    playedSeconds: 0,
+  });
+  const [duration, setDuration] = useState(0);
+  const [error, setError] = useState(false);
 
   const [album, setAlbum] = useState({} as Album);
 
   const playerRef = useRef<PlayerProps>(null);
-
-  // TESTE
 
   useEffect(() => {
     const albumFromQueryParams = AlbumArray.filter(albumObject => {
@@ -69,6 +107,8 @@ const AlbumDetail: React.FC = () => {
     if (albumFromQueryParams) {
       setAlbum(albumFromQueryParams[0]);
     }
+
+    setError(false);
   }, [albumId]);
 
   const nextSong = useCallback(() => {
@@ -79,19 +119,70 @@ const AlbumDetail: React.FC = () => {
     return playerRef.current?.getInternalPlayer().previousVideo();
   }, []);
 
+  const handleSelectMusicInPlaylist = useCallback((index: number): void => {
+    return playerRef.current?.getInternalPlayer().playVideoAt(index);
+  }, []);
+
+  const handleErrorPlayer = useCallback(() => {
+    setError(true);
+  }, []);
+
+  const handleStartPlayer = useCallback(() => {
+    setStartPlaying(true);
+  }, []);
+
+  const handlePlayPlayer = useCallback(() => {
+    setIsPlaying(true);
+  }, []);
+
+  const handlePausePlayer = useCallback(() => {
+    setIsPlaying(false);
+  }, []);
+
+  const handleVideoBuffer = useCallback(() => {
+    setIsLoadingMusic(true);
+    setMusicIndexPlayingInPLaylist(
+      playerRef.current?.getInternalPlayer().getPlaylistIndex() as number,
+    );
+  }, []);
+
+  const handleVideoBufferEnd = useCallback(() => {
+    setIsLoadingMusic(false);
+    setDuration(
+      playerRef.current
+        ? playerRef.current.getInternalPlayer().getDuration()
+        : 0,
+    );
+  }, []);
+
+  const handleOnMouseDownSeekBar = useCallback(() => {
+    setIsSeeking(true);
+  }, []);
+
+  const handleOnMouseUpSeekBar = useCallback((newValue: number) => {
+    setIsSeeking(false);
+    return playerRef.current?.seekTo(newValue);
+  }, []);
+
+  const handleProgress = useCallback(
+    (newProgress: Progress) => {
+      if (!isSeeking) {
+        setProgress(newProgress);
+      }
+    },
+    [isSeeking],
+  );
+
+  const musicTimeElapse = useMemo(() => {
+    return format(duration * progress.played);
+  }, [duration, progress]);
+
+  const musicDuration = useMemo(() => {
+    return format(duration);
+  }, [duration]);
+
   return (
     <Container>
-      <ButtonBack
-        variant="contained"
-        size="medium"
-        startIcon={<KeyboardBackspaceRoundedIcon />}
-        onClick={() => {
-          history.push('');
-        }}
-      >
-        Voltar
-      </ButtonBack>
-
       <Content>
         <AlbumInfo>
           <AlbumCoverInfo>
@@ -104,11 +195,36 @@ const AlbumDetail: React.FC = () => {
             {album.playlist && (
               <ul>
                 {album.playlist.map((music, index) => (
-                  <li key={music}>
+                  <AlbumPlaylistRow
+                    key={music}
+                    isPlaying={
+                      startPlaying && musicIndexPlayingInPLaylist === index
+                    }
+                  >
                     <span>{index + 1}</span>
                     <span>{music}</span>
-                    <PlayCircleOutlineRoundedIcon />
-                  </li>
+                    {musicIndexPlayingInPLaylist === index ? (
+                      isPlaying ? (
+                        <PauseCircleOutlineRoundedIcon
+                          onClick={() => {
+                            setIsPlaying(false);
+                          }}
+                        />
+                      ) : (
+                        <PlayCircleOutlineRoundedIcon
+                          onClick={() => {
+                            setIsPlaying(true);
+                          }}
+                        />
+                      )
+                    ) : (
+                      <PlayCircleOutlineRoundedIcon
+                        onClick={() => {
+                          handleSelectMusicInPlaylist(index);
+                        }}
+                      />
+                    )}
+                  </AlbumPlaylistRow>
                 ))}
               </ul>
             )}
@@ -122,66 +238,114 @@ const AlbumDetail: React.FC = () => {
           url={album.youtubeUrl}
           playing={isPlaying}
           volume={volumePlayer}
-          controls
-          // config={{
-          //   youtube: {
-          //     playerVars: { autoplay: 1 },
-          //   },
-          // }}
+          onBuffer={handleVideoBuffer}
+          onBufferEnd={handleVideoBufferEnd}
+          onError={handleErrorPlayer}
+          onStart={handleStartPlayer}
+          onPlay={handlePlayPlayer}
+          onPause={handlePausePlayer}
+          onProgress={handleProgress}
+          valueLabelDisplay="auto"
+          loop
         />
       </Content>
 
       <Footer>
-        <PlayerButtons>
-          <PlayerButtonNavigation onClick={previousSong}>
-            <NavigateBeforeRoundedIcon />
-          </PlayerButtonNavigation>
+        {error ? (
+          <p>Error on loading player !!</p>
+        ) : (
+          <>
+            <MusicPlayingInfo>
+              {isLoadingMusic && <LoadingIconSvg className="loading-svg" />}
+              <MusicPlayingInfoText isPlaying={startPlaying}>
+                {isPlaying || isLoadingMusic ? (
+                  <PlayingMusicSvg className="music-playing-svg" />
+                ) : (
+                  <PauseOutlinedIcon />
+                )}
+                <span>
+                  {album.playlist &&
+                    album.playlist[musicIndexPlayingInPLaylist]}
+                </span>
+              </MusicPlayingInfoText>
+            </MusicPlayingInfo>
 
-          <PlayerButtonPlayPause
-            onClick={() => {
-              setIsPlaying(!isPlaying);
-            }}
-          >
-            {isPlaying ? (
-              <PauseCircleOutlineRounded />
-            ) : (
-              <PlayCircleOutlineRoundedIcon />
-            )}
-          </PlayerButtonPlayPause>
+            <PlayerButtons>
+              <PlayerButtonNavigation onClick={previousSong}>
+                <NavigateBeforeRoundedIcon />
+              </PlayerButtonNavigation>
 
-          <PlayerButtonNavigation onClick={nextSong}>
-            <NavigateNextRoundedIcon />
-          </PlayerButtonNavigation>
-        </PlayerButtons>
+              <PlayerButtonPlayPause
+                onClick={() => {
+                  setIsPlaying(!isPlaying);
+                }}
+              >
+                {isPlaying ? (
+                  <PauseCircleOutlineRoundedIcon />
+                ) : (
+                  <PlayCircleOutlineRoundedIcon />
+                )}
+              </PlayerButtonPlayPause>
 
-        <VolumeContainer>
-          <PlayerButtonVolume
-            onClick={() => {
-              setVolumePlayer(0);
-            }}
-          >
-            <VolumeDown />
-          </PlayerButtonVolume>
-          <Slider
-            step={0.001}
-            max={1}
-            min={0}
-            defaultValue={0.5}
-            value={volumePlayer}
-            onChange={(event: any, newValue: number | number[]) => {
-              setVolumePlayer(newValue as number);
-            }}
-            aria-labelledby="continuous-slider"
-          />
+              <PlayerButtonNavigation onClick={nextSong}>
+                <NavigateNextRoundedIcon />
+              </PlayerButtonNavigation>
+            </PlayerButtons>
 
-          <PlayerButtonVolume
-            onClick={() => {
-              setVolumePlayer(1);
-            }}
-          >
-            <VolumeUp />
-          </PlayerButtonVolume>
-        </VolumeContainer>
+            <PlayerSeekBarContainer>
+              <TimeText>{musicTimeElapse}</TimeText>
+              <Slider
+                max={0.999999}
+                min={0}
+                step={0.000001}
+                value={progress.played}
+                // valueLabelDisplay="auto"
+                // valueLabelFormat={(value: number) => `${format(value)}`}
+                onChange={(event: object, newValue: number | number[]) => {
+                  setProgress({ ...progress, played: newValue as number });
+                }}
+                aria-labelledby="continuous-slider"
+                onMouseDown={handleOnMouseDownSeekBar}
+                onChangeCommitted={(
+                  event: object,
+                  value: number | number[],
+                ) => {
+                  handleOnMouseUpSeekBar(value as number);
+                }}
+              />
+              <TimeText>{musicDuration}</TimeText>
+            </PlayerSeekBarContainer>
+
+            <VolumeContainer>
+              <PlayerButtonVolume
+                onClick={() => {
+                  setVolumePlayer(0);
+                }}
+              >
+                <VolumeDown />
+              </PlayerButtonVolume>
+              <Slider
+                step={0.001}
+                max={1}
+                min={0}
+                defaultValue={0.5}
+                value={volumePlayer}
+                onChange={(event: any, newValue: number | number[]) => {
+                  setVolumePlayer(newValue as number);
+                }}
+                aria-labelledby="continuous-slider"
+              />
+
+              <PlayerButtonVolume
+                onClick={() => {
+                  setVolumePlayer(1);
+                }}
+              >
+                <VolumeUp />
+              </PlayerButtonVolume>
+            </VolumeContainer>
+          </>
+        )}
       </Footer>
     </Container>
   );

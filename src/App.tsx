@@ -1,23 +1,17 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ThemeProvider } from 'styled-components';
+import AppProvider from './hooks';
 
-import light from './styles/themes/light';
-import dark from './styles/themes/dark';
+import Home from './pages/Home';
 
-import Routes from './routes';
-
-import GlobalStyle from './styles/global';
-
-function App(): any {
+function App(): React.ReactElement {
   return (
-    <ThemeProvider theme={dark}>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-      <GlobalStyle />
-    </ThemeProvider>
+    <BrowserRouter>
+      <AppProvider>
+        <Home />
+      </AppProvider>
+    </BrowserRouter>
   );
 }
 

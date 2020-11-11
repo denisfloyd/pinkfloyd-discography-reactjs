@@ -1,10 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-  :root {
-    --drawer-width: 255;
-  }
-
   * {
     margin: 0;
     padding: 0;
@@ -25,5 +21,56 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
+  }
+
+  @keyframes loading-bar-morph {
+    0% {
+      transform: scaleY(1);
+    }
+    25% {
+      transform: scaleY(0.3);
+    }
+    50% {
+      transform: scaleY(0.7);
+    }
+    75% {
+      transform: scaleY(0.15);
+    }
+  }
+
+  @keyframes loading-spinner {
+    from {
+      transform: rotate(0deg)
+    }
+    to {
+      transform: rotate(360deg)
+    }
+  }
+
+  svg.music-playing-svg {
+    fill: ${props => props.theme.colors.text};
+    opacity: 1;
+
+    rect#loading-bar-left {
+      animation: loading-bar-morph 1s linear 0.1s infinite;
+      transform-origin: center;
+    }
+    rect#loading-bar-middle {
+      animation: loading-bar-morph 1s linear 0.2s infinite;
+      transform-origin: center;
+    }
+    rect#loading-bar-right {
+      animation: loading-bar-morph 1s linear 0.4s infinite;
+      transform-origin: center;
+    }
+  }
+
+  svg.loading-svg {
+    g {
+      > path:nth-child(2) {
+        fill: ${props => props.theme.colors.text};
+      }
+    }
+    animation: loading-spinner 1s linear infinite
   }
 `;

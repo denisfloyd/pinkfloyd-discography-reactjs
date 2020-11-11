@@ -1,79 +1,53 @@
-import React, { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import HeaderBar from '../../components/Header';
 import AlbumCard from '../../components/AlbumCard';
 
 import { pinkFloydAlbunsArray } from '../../data/info';
 
-import {
-  ContainerDrawer,
-  DrawerHeader,
-  DrawerHeaderContainer,
-  DrawerBackButton,
-  DrawerAlbumItem,
-  Container,
-  Content,
-  AlbumsView,
-} from './styles';
+import { Container, SearchInput, AlbumsView } from './styles';
 
 const DashboardAlbum: React.FC = () => {
-  const [toogleDrawer, setToggleDrawer] = useState(false);
+  // Album variables
+  const [albumList, setAlbumList] = useState(pinkFloydAlbunsArray);
+  const [albumFilter, setAlbumFilter] = useState('');
 
-  const [userScrollDown, setUserScrollDown] = useState(false);
+  const debounce: Subject<string> = new Subject<string>();
 
-  const handleScrollScreen = useCallback(() => {
-    if (window.scrollY > 60) {
-      return setUserScrollDown(true);
-    }
-    return setUserScrollDown(false);
-  }, []);
+  useEffect(() => {
+    debounce
+      .pipe(debounceTime(300))
+      .subscribe(filter => setAlbumFilter(filter));
 
-  window.addEventListener('scroll', handleScrollScreen);
+    return () => {
+      debounce.unsubscribe();
+    };
+  }, [debounce]);
+
+  useEffect(() => {
+    setAlbumList(
+      albumFilter === ''
+        ? pinkFloydAlbunsArray
+        : pinkFloydAlbunsArray.filter(album => {
+            return album.name.toLowerCase().includes(albumFilter.toLowerCase());
+          }),
+    );
+  }, [albumFilter]);
 
   return (
-    <>
-      <HeaderBar
-        userScroolDown={userScrollDown}
-        handleOpenDrawer={setToggleDrawer}
-        toogleDrawer={toogleDrawer}
-      />
-      <ContainerDrawer
-        anchor="left"
-        open={toogleDrawer}
-        onClose={() => {
-          setToggleDrawer(false);
+    <Container>
+      <SearchInput
+        type="text"
+        placeholder="Album..."
+        onKeyUp={e => {
+          debounce.next(e.currentTarget.value);
         }}
-      >
-        <DrawerHeader>
-          <DrawerHeaderContainer>
-            <DrawerBackButton
-              onClick={() => {
-                setToggleDrawer(!toogleDrawer);
-              }}
-            >
-              <ArrowBackIosIcon />
-            </DrawerBackButton>
-          </DrawerHeaderContainer>
-        </DrawerHeader>
-
-        <ul>
-          {pinkFloydAlbunsArray.map(album => (
-            <DrawerAlbumItem key={album.id}>
-              <Link to={`/album/${album.id}`}>
-                <img src={album.image} alt={album.name} />
-                <p>{album.name}</p>
-              </Link>
-            </DrawerAlbumItem>
-          ))}
-        </ul>
-      </ContainerDrawer>
-
-      <Container>
-        <Content />
-      </Container>
+        onChange={e => {
+          debounce.next(e.currentTarget.value);
+        }}
+      />
 
       <AlbumsView>
         {/* <Album>
@@ -83,11 +57,11 @@ const DashboardAlbum: React.FC = () => {
           </strong>
         </h2> */}
 
-        {pinkFloydAlbunsArray.map(album => (
+        {albumList.map(album => (
           <AlbumCard key={album.id} album={album} />
         ))}
       </AlbumsView>
-    </>
+    </Container>
   );
 };
 

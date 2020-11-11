@@ -1,4 +1,4 @@
-<svg id="loading-bar" xmlns="http://www.w3.org/2000/svg" width="36" height="22" viewBox="0 0 36 22">
+<svg id="loading-bar" xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 36 22">
   <g>
     <rect id="loading-bar-left" width="8" height="22"/>
     <rect id="loading-bar-middle" width="8" height="22" x="14"/>
