@@ -57,7 +57,7 @@ const DrawerNav: React.FC<DrawerNavProps> = ({
       <ul>
         {pinkFloydAlbunsArray.map(album => (
           <AlbumItem key={album.id}>
-            <Link to={`/album/${album.id}`}>
+            <Link to={`/album/${album.id}`} replace>
               <img src={album.image} alt={album.name} />
               <p>{album.name}</p>
             </Link>

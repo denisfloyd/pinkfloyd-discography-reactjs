@@ -93,6 +93,7 @@ const AlbumDetail: React.FC = () => {
     playedSeconds: 0,
   });
   const [duration, setDuration] = useState(0);
+  const [error, setError] = useState(false);
 
   const [album, setAlbum] = useState({} as Album);
 
@@ -106,6 +107,8 @@ const AlbumDetail: React.FC = () => {
     if (albumFromQueryParams) {
       setAlbum(albumFromQueryParams[0]);
     }
+
+    setError(false);
   }, [albumId]);
 
   const nextSong = useCallback(() => {
@@ -121,7 +124,7 @@ const AlbumDetail: React.FC = () => {
   }, []);
 
   const handleErrorPlayer = useCallback(() => {
-    //
+    setError(true);
   }, []);
 
   const handleStartPlayer = useCallback(() => {
@@ -242,96 +245,107 @@ const AlbumDetail: React.FC = () => {
           onPlay={handlePlayPlayer}
           onPause={handlePausePlayer}
           onProgress={handleProgress}
+          valueLabelDisplay="auto"
           loop
         />
       </Content>
 
       <Footer>
-        <MusicPlayingInfo>
-          {isLoadingMusic && <LoadingIconSvg className="loading-svg" />}
-          <MusicPlayingInfoText isPlaying={startPlaying}>
-            {isPlaying || isLoadingMusic ? (
-              <PlayingMusicSvg className="music-playing-svg" />
-            ) : (
-              <PauseOutlinedIcon />
-            )}
-            <span>
-              {album.playlist && album.playlist[musicIndexPlayingInPLaylist]}
-            </span>
-          </MusicPlayingInfoText>
-        </MusicPlayingInfo>
+        {error ? (
+          <p>Error on loading player !!</p>
+        ) : (
+          <>
+            <MusicPlayingInfo>
+              {isLoadingMusic && <LoadingIconSvg className="loading-svg" />}
+              <MusicPlayingInfoText isPlaying={startPlaying}>
+                {isPlaying || isLoadingMusic ? (
+                  <PlayingMusicSvg className="music-playing-svg" />
+                ) : (
+                  <PauseOutlinedIcon />
+                )}
+                <span>
+                  {album.playlist &&
+                    album.playlist[musicIndexPlayingInPLaylist]}
+                </span>
+              </MusicPlayingInfoText>
+            </MusicPlayingInfo>
 
-        <PlayerButtons>
-          <PlayerButtonNavigation onClick={previousSong}>
-            <NavigateBeforeRoundedIcon />
-          </PlayerButtonNavigation>
+            <PlayerButtons>
+              <PlayerButtonNavigation onClick={previousSong}>
+                <NavigateBeforeRoundedIcon />
+              </PlayerButtonNavigation>
 
-          <PlayerButtonPlayPause
-            onClick={() => {
-              setIsPlaying(!isPlaying);
-            }}
-          >
-            {isPlaying ? (
-              <PauseCircleOutlineRoundedIcon />
-            ) : (
-              <PlayCircleOutlineRoundedIcon />
-            )}
-          </PlayerButtonPlayPause>
+              <PlayerButtonPlayPause
+                onClick={() => {
+                  setIsPlaying(!isPlaying);
+                }}
+              >
+                {isPlaying ? (
+                  <PauseCircleOutlineRoundedIcon />
+                ) : (
+                  <PlayCircleOutlineRoundedIcon />
+                )}
+              </PlayerButtonPlayPause>
 
-          <PlayerButtonNavigation onClick={nextSong}>
-            <NavigateNextRoundedIcon />
-          </PlayerButtonNavigation>
-        </PlayerButtons>
+              <PlayerButtonNavigation onClick={nextSong}>
+                <NavigateNextRoundedIcon />
+              </PlayerButtonNavigation>
+            </PlayerButtons>
 
-        <PlayerSeekBarContainer>
-          <TimeText>{musicTimeElapse}</TimeText>
-          <Slider
-            max={0.999999}
-            min={0}
-            step={0.000001}
-            value={progress.played}
-            // valueLabelDisplay="auto"
-            // valueLabelFormat={(value: number) => `${format(value)}`}
-            onChange={(event: object, newValue: number | number[]) => {
-              setProgress({ ...progress, played: newValue as number });
-            }}
-            aria-labelledby="continuous-slider"
-            onMouseDown={handleOnMouseDownSeekBar}
-            onChangeCommitted={(event: object, value: number | number[]) => {
-              handleOnMouseUpSeekBar(value as number);
-            }}
-          />
-          <TimeText>{musicDuration}</TimeText>
-        </PlayerSeekBarContainer>
+            <PlayerSeekBarContainer>
+              <TimeText>{musicTimeElapse}</TimeText>
+              <Slider
+                max={0.999999}
+                min={0}
+                step={0.000001}
+                value={progress.played}
+                // valueLabelDisplay="auto"
+                // valueLabelFormat={(value: number) => `${format(value)}`}
+                onChange={(event: object, newValue: number | number[]) => {
+                  setProgress({ ...progress, played: newValue as number });
+                }}
+                aria-labelledby="continuous-slider"
+                onMouseDown={handleOnMouseDownSeekBar}
+                onChangeCommitted={(
+                  event: object,
+                  value: number | number[],
+                ) => {
+                  handleOnMouseUpSeekBar(value as number);
+                }}
+              />
+              <TimeText>{musicDuration}</TimeText>
+            </PlayerSeekBarContainer>
 
-        <VolumeContainer>
-          <PlayerButtonVolume
-            onClick={() => {
-              setVolumePlayer(0);
-            }}
-          >
-            <VolumeDown />
-          </PlayerButtonVolume>
-          <Slider
-            step={0.001}
-            max={1}
-            min={0}
-            defaultValue={0.5}
-            value={volumePlayer}
-            onChange={(event: any, newValue: number | number[]) => {
-              setVolumePlayer(newValue as number);
-            }}
-            aria-labelledby="continuous-slider"
-          />
+            <VolumeContainer>
+              <PlayerButtonVolume
+                onClick={() => {
+                  setVolumePlayer(0);
+                }}
+              >
+                <VolumeDown />
+              </PlayerButtonVolume>
+              <Slider
+                step={0.001}
+                max={1}
+                min={0}
+                defaultValue={0.5}
+                value={volumePlayer}
+                onChange={(event: any, newValue: number | number[]) => {
+                  setVolumePlayer(newValue as number);
+                }}
+                aria-labelledby="continuous-slider"
+              />
 
-          <PlayerButtonVolume
-            onClick={() => {
-              setVolumePlayer(1);
-            }}
-          >
-            <VolumeUp />
-          </PlayerButtonVolume>
-        </VolumeContainer>
+              <PlayerButtonVolume
+                onClick={() => {
+                  setVolumePlayer(1);
+                }}
+              >
+                <VolumeUp />
+              </PlayerButtonVolume>
+            </VolumeContainer>
+          </>
+        )}
       </Footer>
     </Container>
   );
