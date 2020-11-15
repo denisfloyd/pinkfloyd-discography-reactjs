@@ -39,7 +39,7 @@
 </p>
 
 <p align="center">
-  
+  <img src=".github/sample.gif">
 </p>
 
 # :pushpin: Table of Contents
