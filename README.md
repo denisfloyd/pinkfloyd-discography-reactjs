@@ -14,7 +14,9 @@
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-gray">
 
-  
+   <a href="https://app.netlify.com/sites/pinkfloyd-discography-denismend/settings/deploys">
+      <img alt="Netfly" src="https://img.shields.io/badge/netfly-Success-gray?style=flat&logo=netlify&logoColor=white" />
+   </a>
 </p>
 
 <p align="center">
@@ -34,7 +36,7 @@
 <p align="center"
   <br /><br />
   <span>
-    <p>Construct Demo Page ... </p>
+    <a href="https://pinkfloyd-discography-denismend.netlify.app/" target="_blank">Demo</a>
   </span>
 </p>
 
